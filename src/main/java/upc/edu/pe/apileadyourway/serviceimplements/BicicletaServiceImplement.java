@@ -3,14 +3,13 @@ package upc.edu.pe.apileadyourway.serviceimplements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import upc.edu.pe.apileadyourway.entities.Bicicleta;
-import upc.edu.pe.apileadyourway.entities.Usuario;
 import upc.edu.pe.apileadyourway.repositories.IBicicletaRepository;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IBicicletaService;
 
 import java.util.List;
 
 @Service
-public class BicicletaServiceImplements implements IBicicletaService {
+public class BicicletaServiceImplement implements IBicicletaService {
     @Autowired
     private IBicicletaRepository repository;
 

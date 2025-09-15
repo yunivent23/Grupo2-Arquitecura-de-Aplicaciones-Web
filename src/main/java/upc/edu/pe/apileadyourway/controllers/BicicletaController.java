@@ -96,7 +96,7 @@ public class BicicletaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No se encontraron bicicletas con los filtros especificados.");
         }
-        
+
         List<BicicletaDTOListar> dto = bicicletas.stream()
                 .map(b -> new ModelMapper().map(b, BicicletaDTOListar.class))
                 .collect(Collectors.toList());

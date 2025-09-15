@@ -24,6 +24,8 @@ public class Usuario {
     private LocalDate fechaRegistro;
     @Column(name = "estadoUsuario",length = 15,nullable = false)
     private String estadoUsuario;
+
+    //rol true=suministrador  false=cliente
     @Column(name = "rolUsuario",nullable = false)
     private boolean rolUsuario;
     @Column(name = "telefonoUsuario",length = 40,nullable = false)
