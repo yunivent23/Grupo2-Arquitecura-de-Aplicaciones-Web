@@ -1,0 +1,88 @@
+package upc.edu.pe.apileadyourway.controllers;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import upc.edu.pe.apileadyourway.dtos.UsuarioDTO;
+import upc.edu.pe.apileadyourway.entities.Usuario;
+import upc.edu.pe.apileadyourway.serviceinterfaces.IUsuarioService;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@RestController
+@RequestMapping("/usuarios")
+public class UsuarioController {
+
+    @Autowired
+    private IUsuarioService service;
+
+    @GetMapping
+    public List<UsuarioDTO> listar() {
+        return service.listarTodo().stream().map(u -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(u, UsuarioDTO.class);
+        }).collect(Collectors.toList());
+    }
+
+    @PostMapping
+    public void insert(@RequestBody UsuarioDTO dto) {
+        ModelMapper m = new ModelMapper();
+        Usuario usuario = m.map(dto, Usuario.class);
+        service.insert(usuario);
+    }
+
+    @GetMapping("/buscar/{id}")
+    public ResponseEntity<?> findId(@PathVariable("id") Integer id) {
+        Usuario usuario = service.findId(id);
+        if (usuario == null) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("No existe un usuario con el ID: " + id);
+        }
+        ModelMapper m = new ModelMapper();
+        UsuarioDTO dto = m.map(usuario, UsuarioDTO.class);
+        return ResponseEntity.ok(dto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
+        Usuario usuario = service.findId(id);
+        if (usuario == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existe un usuario con el ID: " + id);
+        }
+        service.delete(id);
+        return ResponseEntity.ok("Usuario con ID " + id + " eliminado correctamente.");
+    }
+
+    @PutMapping
+    public ResponseEntity<String> edit(@RequestBody UsuarioDTO dto) {
+        ModelMapper m = new ModelMapper();
+        Usuario u = m.map(dto, Usuario.class);
+        Usuario existente = service.findId(u.getIdUsuario());
+        if (existente == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se puede modificar. No existe un usuario con el ID: " + u.getIdUsuario());
+        }
+        service.edit(u);
+        return ResponseEntity.ok("Usuario con ID " + u.getIdUsuario() + " modificado correctamente.");
+    }
+
+    @GetMapping("/busquedas")
+    public ResponseEntity<?> buscarPorNombre(@RequestParam String nombre) {
+        List<Usuario> usuarios = service.buscarService(nombre);
+        if (usuarios.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron usuarios con el nombre: " + nombre);
+        }
+        List<UsuarioDTO> listaDTO = usuarios.stream().map(u -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(u, UsuarioDTO.class);
+        }).collect(Collectors.toList());
+        return ResponseEntity.ok(listaDTO);
+    }
+
+}
