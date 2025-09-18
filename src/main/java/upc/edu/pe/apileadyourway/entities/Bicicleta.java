@@ -32,6 +32,8 @@ public class Bicicleta {
     private int vistas;
     @Column(name = "fechaPublicacion", nullable = false)
     private LocalDate fechaPublicacion;
+    @Column(name = "modeloBicicleta",length = 50, nullable = false)
+    private String modeloBicicleta;
 
     @ManyToOne
     @JoinColumn(name="idUsuario")
@@ -40,7 +42,7 @@ public class Bicicleta {
     public Bicicleta() {
     }
 
-    public Bicicleta(int id, String descripcionBicicleta, String tipoBicicleta, String colorBicicleta, String marcaBicicleta, Double precioBicicleta, String estadoBicicleta, String ubicacionBicicleta, boolean disponible, int vistas, LocalDate fechaPublicacion, Usuario usuario) {
+    public Bicicleta(int id, String descripcionBicicleta, String tipoBicicleta, String colorBicicleta, String marcaBicicleta, Double precioBicicleta, String estadoBicicleta, String ubicacionBicicleta, boolean disponible, int vistas, LocalDate fechaPublicacion, Usuario usuario, String modeloBicicleta) {
         this.idBicicleta = id;
         this.descripcionBicicleta = descripcionBicicleta;
         this.tipoBicicleta = tipoBicicleta;
@@ -53,14 +55,15 @@ public class Bicicleta {
         this.vistas = vistas;
         this.fechaPublicacion = fechaPublicacion;
         this.usuario = usuario;
+        this.modeloBicicleta=modeloBicicleta;
     }
 
     public int getIdBicicleta() {
         return idBicicleta;
     }
 
-    public void setId(int id) {
-        this.idBicicleta = id;
+    public void setIdBicicleta(int idBicicleta) {
+        this.idBicicleta = idBicicleta;
     }
 
     public String getDescripcionBicicleta() {
@@ -149,5 +152,14 @@ public class Bicicleta {
 
     public void setFechaPublicacion(LocalDate fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
+    }
+
+
+    public String getModeloBicicleta() {
+        return modeloBicicleta;
+    }
+
+    public void setModeloBicicleta(String modeloBicicleta) {
+        this.modeloBicicleta = modeloBicicleta;
     }
 }

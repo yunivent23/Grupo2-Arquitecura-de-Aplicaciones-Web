@@ -11,7 +11,7 @@ public class UsuarioDTO {
     private String emailUsuario;
     private LocalDate fechaRegistro;
     private String estadoUsuario;
-    private boolean rolUsuario;
+    private String rolUsuario;
     private String telefonoUsuario;
     private String direccionUsuario;
     private int idUsuario;   // para edit o delete
@@ -58,11 +58,11 @@ public class UsuarioDTO {
         this.estadoUsuario = estadoUsuario;
     }
 
-    public boolean isRolUsuario() {
+    public String isRolUsuario() {
         return rolUsuario;
     }
 
-    public void setRolUsuario(boolean rolUsuario) {
+    public void setRolUsuario(String rolUsuario) {
         this.rolUsuario = rolUsuario;
     }
 

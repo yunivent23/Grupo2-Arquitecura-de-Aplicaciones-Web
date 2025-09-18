@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.apileadyourway.dtos.BicicletaDTOListar;
 import upc.edu.pe.apileadyourway.dtos.BicicletaDTOPublicar;
 import upc.edu.pe.apileadyourway.entities.Bicicleta;
-import upc.edu.pe.apileadyourway.entities.Usuario;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IBicicletaService;
 
 import java.util.List;
@@ -103,19 +102,4 @@ public class BicicletaController {
 
         return ResponseEntity.ok(dto);
     }
-
-    /*@GetMapping("/disponible")
-    public ResponseEntity<?> buscarPorDisponibilidad(@RequestParam ("disponible") boolean disponible) {
-        List<Bicicleta> bicicletas = service.buscarPorDisponibilidad(disponible);
-
-        if (bicicletas.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron bicicletas con la disponibilidad: " + disponible);
-        }
-
-        ModelMapper m = new ModelMapper();
-        List<BicicletaDTOListar> dto = bicicletas.stream().map(bicicleta -> m.map(bicicleta, BicicletaDTOListar.class)).collect(Collectors.toList());
-
-        return ResponseEntity.ok(dto);
-    }*/
 }

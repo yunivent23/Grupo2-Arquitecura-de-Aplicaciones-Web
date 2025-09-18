@@ -10,6 +10,12 @@ import java.util.List;
 
 @Repository
 public interface IUsuarioRepository extends JpaRepository<Usuario,Integer> {
-    @Query("SELECT u FROM Usuario u WHERE u.nombreUsuario LIKE %:nombre%")
+    @Query(value = "SELECT u FROM usuario u WHERE u.nombre_usuario LIKE %:nombre%", nativeQuery = true)
     List<Usuario> buscarPorNombre(@Param("nombre") String nombre);
+
+    @Query(value="SELECT EXISTS(SELECT 1\n" +
+            "FROM usuario\n" +
+            "WHERE email_usuario = :correo\n" +
+            "AND contrasenia = :password)", nativeQuery = true)
+    Boolean validarLogin(@Param("correo") String correo, @Param("password") String password);
 }

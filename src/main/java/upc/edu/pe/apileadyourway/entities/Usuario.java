@@ -26,8 +26,8 @@ public class Usuario {
     private String estadoUsuario;
 
     //rol true=suministrador  false=cliente
-    @Column(name = "rolUsuario",nullable = false)
-    private boolean rolUsuario;
+    @Column(name = "rolUsuario", length = 20, nullable = false)
+    private String rolUsuario;
     @Column(name = "telefonoUsuario",length = 40,nullable = false)
     private String telefonoUsuario;
     @Column(name = "direccionUsuario",length = 40,nullable = false)
@@ -36,7 +36,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nombreUsuario, String dniUsuario, String contrasenia, String emailUsuario, LocalDate fechaRegistro, String estadoUsuario, boolean rolUsuario, String telefonoUsuario, String direccionUsuario) {
+    public Usuario(int idUsuario, String nombreUsuario, String dniUsuario, String contrasenia, String emailUsuario, LocalDate fechaRegistro, String estadoUsuario, String rolUsuario, String telefonoUsuario, String direccionUsuario) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.dniUsuario = dniUsuario;
@@ -121,11 +121,11 @@ public class Usuario {
         this.telefonoUsuario = telefonoUsuario;
     }
 
-    public boolean isRolUsuario() {
+    public String isRolUsuario() {
         return rolUsuario;
     }
 
-    public void setRolUsuario(boolean rolUsuario) {
+    public void setRolUsuario(String rolUsuario) {
         this.rolUsuario = rolUsuario;
     }
 }

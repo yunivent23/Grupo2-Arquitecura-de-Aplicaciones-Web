@@ -11,4 +11,5 @@ public interface IUsuarioService {
     public void delete(int id);
     public void edit(Usuario u);
     public List<Usuario> buscarService(String nombre);
+    public boolean validarUsuario(String correo, String password);
 }

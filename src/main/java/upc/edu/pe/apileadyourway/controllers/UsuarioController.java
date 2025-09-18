@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.apileadyourway.dtos.UsuarioDTO;
+import upc.edu.pe.apileadyourway.dtos.UsuarioLoginDTO;
 import upc.edu.pe.apileadyourway.entities.Usuario;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IUsuarioService;
 
@@ -85,4 +86,25 @@ public class UsuarioController {
         return ResponseEntity.ok(listaDTO);
     }
 
+    //------LOGIN------
+    @GetMapping("/login")
+    public ResponseEntity<String> login(@RequestParam("correo") String correo, @RequestParam("password") String password) {
+        boolean valido = service.validarUsuario(correo, password);
+
+        if (valido){
+            return ResponseEntity.ok("¡Credenciales verificadas!");
+        }else{
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody UsuarioLoginDTO dto) {
+        boolean valido = service.validarUsuario(dto.getEmailUsuario(), dto.getContrasenia());
+        if (valido){
+            return ResponseEntity.ok("¡Credenciales verificadas! Bienvenido"+ dto.getNombreUsuario());
+        }else{
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
 }
