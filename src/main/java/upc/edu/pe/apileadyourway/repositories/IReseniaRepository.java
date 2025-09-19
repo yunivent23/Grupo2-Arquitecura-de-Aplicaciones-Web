@@ -7,4 +7,5 @@ import upc.edu.pe.apileadyourway.entities.Resenia;
 @Repository
 public interface IReseniaRepository extends JpaRepository<Resenia, Integer> {
 
+
 }

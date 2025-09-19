@@ -10,7 +10,7 @@ public class Resenia {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int idResenia;
-    @Column(name = "ubicacionBicicleta", nullable = false)
+    @Column(name = "puntuacion", nullable = false)
     private int puntuacion;
     @Column(name = "comentario",length = 50, nullable = false)
     private String comentario;
