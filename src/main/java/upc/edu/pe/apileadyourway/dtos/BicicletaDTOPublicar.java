@@ -1,16 +1,26 @@
 package upc.edu.pe.apileadyourway.dtos;
 
-public class BicicletaDTOPublicar {
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import upc.edu.pe.apileadyourway.entities.Usuario;
 
+import java.time.LocalDate;
+
+public class BicicletaDTOPublicar {
     private int idBicicleta;
+    private String descripcionBicicleta;
     private String tipoBicicleta;
     private String marcaBicicleta;
     private String colorBicicleta;
     private String estadoBicicleta;
-    private double precioBicicleta;
+    private Double precioBicicleta;
+    private String ubicacionBicicleta;
     private boolean disponible;
-    private int idUsuario;
-
+    private int vistas;
+    private LocalDate fechaPublicacion;
+    private String modeloBicicleta;
+    private Usuario usuario;
 
     public int getIdBicicleta() {
         return idBicicleta;
@@ -18,6 +28,14 @@ public class BicicletaDTOPublicar {
 
     public void setIdBicicleta(int idBicicleta) {
         this.idBicicleta = idBicicleta;
+    }
+
+    public String getDescripcionBicicleta() {
+        return descripcionBicicleta;
+    }
+
+    public void setDescripcionBicicleta(String descripcionBicicleta) {
+        this.descripcionBicicleta = descripcionBicicleta;
     }
 
     public String getTipoBicicleta() {
@@ -52,12 +70,20 @@ public class BicicletaDTOPublicar {
         this.estadoBicicleta = estadoBicicleta;
     }
 
-    public double getPrecioBicicleta() {
+    public Double getPrecioBicicleta() {
         return precioBicicleta;
     }
 
-    public void setPrecioBicicleta(double precioBicicleta) {
+    public void setPrecioBicicleta(Double precioBicicleta) {
         this.precioBicicleta = precioBicicleta;
+    }
+
+    public String getUbicacionBicicleta() {
+        return ubicacionBicicleta;
+    }
+
+    public void setUbicacionBicicleta(String ubicacionBicicleta) {
+        this.ubicacionBicicleta = ubicacionBicicleta;
     }
 
     public boolean isDisponible() {
@@ -68,11 +94,27 @@ public class BicicletaDTOPublicar {
         this.disponible = disponible;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public int getVistas() {
+        return vistas;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setVistas(int vistas) {
+        this.vistas = vistas;
+    }
+
+    public LocalDate getFechaPublicacion() {
+        return fechaPublicacion;
+    }
+
+    public void setFechaPublicacion(LocalDate fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
+    }
+
+    public String getModeloBicicleta() {
+        return modeloBicicleta;
+    }
+
+    public void setModeloBicicleta(String modeloBicicleta) {
+        this.modeloBicicleta = modeloBicicleta;
     }
 }

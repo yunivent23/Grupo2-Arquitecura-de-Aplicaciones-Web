@@ -11,11 +11,14 @@ import upc.edu.pe.apileadyourway.dtos.AlquilerDTO;
 import upc.edu.pe.apileadyourway.dtos.AlquilerSuministradorDTO;
 import upc.edu.pe.apileadyourway.dtos.UsuarioDTO;
 import upc.edu.pe.apileadyourway.entities.Alquiler;
+import upc.edu.pe.apileadyourway.entities.Bicicleta;
 import upc.edu.pe.apileadyourway.entities.Usuario;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IAlquilerService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/alquileres")
@@ -23,7 +26,7 @@ public class AlquilerController {
     @Autowired
     private IAlquilerService service;
 
-    @PostMapping
+    @PostMapping("/registrar")
     public void registrarAlquiler(@RequestBody AlquilerDTO dto){
         ModelMapper m = new ModelMapper();
         Alquiler alquiler = m.map(dto, Alquiler.class);
@@ -37,7 +40,7 @@ public class AlquilerController {
         Alquiler existente = service.findId(a.getIdAlquiler());
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se puede modificar. No existe un usuario con el ID: " +  a.getIdAlquiler());
+                    .body("No se puede modificar. No existe un alquiler con el ID: " +  a.getIdAlquiler());
         }
         service.editarAlquiler(a);
         return ResponseEntity.ok("Alquiler con ID " + a.getIdAlquiler() + " modificado correctamente.");

@@ -21,7 +21,7 @@ public class AlquilerServiceImplement implements IAlquilerService {
 
     @Override
     public void registrarAlquiler(Alquiler alquiler) {
-        repository.save(alquiler);
+       repository.save(alquiler);
     }
 
     @Override
