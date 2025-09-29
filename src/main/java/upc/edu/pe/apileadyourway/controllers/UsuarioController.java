@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.apileadyourway.dtos.UsuarioDTO;
 import upc.edu.pe.apileadyourway.dtos.UsuarioLoginDTO;
@@ -21,6 +22,7 @@ public class UsuarioController {
     private IUsuarioService service;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
     public List<UsuarioDTO> listar() {
         return service.listarTodo().stream().map(u -> {
             ModelMapper m = new ModelMapper();
@@ -29,6 +31,7 @@ public class UsuarioController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
     public void insert(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
         Usuario usuario = m.map(dto, Usuario.class);
@@ -36,6 +39,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/buscar/{id}")
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
     public ResponseEntity<?> findId(@PathVariable("id") Integer id) {
         Usuario usuario = service.findId(id);
         if (usuario == null) {
@@ -49,6 +53,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
     public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
         Usuario usuario = service.findId(id);
         if (usuario == null) {
@@ -60,6 +65,7 @@ public class UsuarioController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
     public ResponseEntity<String> edit(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
         Usuario u = m.map(dto, Usuario.class);
@@ -73,6 +79,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/busquedas")
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
     public ResponseEntity<?> buscarPorNombre(@RequestParam String nombre) {
         List<Usuario> usuarios = service.buscarService(nombre);
         if (usuarios.isEmpty()) {
@@ -88,6 +95,7 @@ public class UsuarioController {
 
     //------LOGIN------
     @GetMapping("/login")
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
     public ResponseEntity<String> login(@RequestParam("correo") String correo, @RequestParam("password") String password) {
         boolean valido = service.validarUsuario(correo, password);
 
@@ -99,6 +107,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
     public ResponseEntity<String> login(@RequestBody UsuarioLoginDTO dto) {
         boolean valido = service.validarUsuario(dto.getEmailUsuario(), dto.getContrasenia());
         if (valido){

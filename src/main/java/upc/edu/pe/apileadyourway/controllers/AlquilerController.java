@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.apileadyourway.dtos.AlquilerClienteDTO;
 import upc.edu.pe.apileadyourway.dtos.AlquilerDTO;
@@ -27,6 +28,7 @@ public class AlquilerController {
     private IAlquilerService service;
 
     @PostMapping("/registrar")
+    @PreAuthorize("hasAuthority('CLIENTE')")
     public void registrarAlquiler(@RequestBody AlquilerDTO dto){
         ModelMapper m = new ModelMapper();
         Alquiler alquiler = m.map(dto, Alquiler.class);
@@ -34,6 +36,7 @@ public class AlquilerController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
     public ResponseEntity<String> editar(@RequestBody AlquilerDTO dto) {
         ModelMapper m = new ModelMapper();
         Alquiler a = m.map(dto, Alquiler.class);
@@ -47,6 +50,7 @@ public class AlquilerController {
     }
 
     @GetMapping("/buscar/{id}")
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
     public ResponseEntity<?> findId(@PathVariable("id") Integer id) {
         Alquiler alquiler = service.findId(id);
         if (alquiler == null) {
@@ -60,6 +64,7 @@ public class AlquilerController {
     }
 
     @GetMapping("/historialC/{id}")
+    @PreAuthorize("hasAuthority('CLIENTE')")
     public ResponseEntity<List<AlquilerClienteDTO>> historialAlquileresCliente(@PathVariable("id") Integer id) {
         Usuario cliente = new Usuario();
         cliente.setIdUsuario(id);
@@ -80,6 +85,7 @@ public class AlquilerController {
     }
 
     @GetMapping("/historialS/{id}")
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')")
     public ResponseEntity<List<AlquilerSuministradorDTO>> historialAlquileresSuministrador(@PathVariable("id") Integer id) {
         Usuario cliente = new Usuario();
         cliente.setIdUsuario(id);

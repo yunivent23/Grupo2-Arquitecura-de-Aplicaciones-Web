@@ -23,9 +23,7 @@ public class Usuario {
     @Column(name = "fechaRegistro", nullable = false)
     private LocalDate fechaRegistro;
     @Column(name = "estadoUsuario",length = 15,nullable = false)
-    private String estadoUsuario;
-
-    //rol true=suministrador  false=cliente
+    private Boolean estadoUsuario;
     @Column(name = "rolUsuario", length = 20, nullable = false)
     private String rolUsuario;
     @Column(name = "telefonoUsuario",length = 40,nullable = false)
@@ -36,7 +34,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nombreUsuario, String dniUsuario, String contrasenia, String emailUsuario, LocalDate fechaRegistro, String estadoUsuario, String rolUsuario, String telefonoUsuario, String direccionUsuario) {
+    public Usuario(int idUsuario, String nombreUsuario, String dniUsuario, String contrasenia, String emailUsuario, LocalDate fechaRegistro, Boolean estadoUsuario, String rolUsuario, String telefonoUsuario, String direccionUsuario) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.dniUsuario = dniUsuario;
@@ -97,11 +95,11 @@ public class Usuario {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public String getEstadoUsuario() {
+    public Boolean getEstadoUsuario() {
         return estadoUsuario;
     }
 
-    public void setEstadoUsuario(String estadoUsuario) {
+    public void setEstadoUsuario(Boolean estadoUsuario) {
         this.estadoUsuario = estadoUsuario;
     }
 
@@ -121,7 +119,7 @@ public class Usuario {
         this.telefonoUsuario = telefonoUsuario;
     }
 
-    public String isRolUsuario() {
+    public String getRolUsuario() {
         return rolUsuario;
     }
 

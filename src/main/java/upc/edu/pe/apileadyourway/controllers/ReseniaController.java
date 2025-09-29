@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.apileadyourway.dtos.ReseniaDTO;
 import upc.edu.pe.apileadyourway.dtos.UsuarioDTO;
@@ -22,13 +23,16 @@ public class ReseniaController {
     private IReseniaService service;
 
     @PostMapping
+    @PreAuthorize("hasAuthority('CLIENTE')")
     public void registrarResenia(@RequestBody ReseniaDTO dto) {
+
         ModelMapper m = new ModelMapper();
         Resenia resenia = m.map(dto, Resenia.class);
         service.publicarResenia(resenia);
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('CLIENTE')")
     public ResponseEntity<String> editarResenia(@RequestBody ReseniaDTO dto) {
         ModelMapper m = new ModelMapper();
         Resenia resenia = m.map(dto, Resenia.class);
@@ -42,6 +46,7 @@ public class ReseniaController {
     }
 
     @DeleteMapping
+    @PreAuthorize("hasAuthority('CLIENTE')")
     public ResponseEntity<String> eliminarResenia(@PathVariable("id") Integer id){
         Resenia resenia = service.buscarPorId(id);
         if (resenia == null) {
