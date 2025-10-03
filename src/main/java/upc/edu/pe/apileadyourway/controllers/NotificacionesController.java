@@ -7,14 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.apileadyourway.dtos.NotificacionesDTO;
 import upc.edu.pe.apileadyourway.entities.Notificaciones;
-import upc.edu.pe.apileadyourway.serviceinterfaces.IBicicletaService;
 import upc.edu.pe.apileadyourway.serviceinterfaces.INotificacionesService;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/Notis")
-
 public class NotificacionesController {
     @Autowired
     private INotificacionesService service;
@@ -25,6 +22,8 @@ public class NotificacionesController {
         Notificaciones notificaciones = m.map(dto, Notificaciones.class);
         service.insertarNotificaciones(notificaciones);
     }
+
+
     @GetMapping("/{id}")
     public ResponseEntity<?> listarNotificaciones(@PathVariable("id") Integer id) {
     Notificaciones not = service.listaID(id);

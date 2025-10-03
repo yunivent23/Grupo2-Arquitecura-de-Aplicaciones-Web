@@ -5,11 +5,11 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="ListaFavoritos")
-public class ListaFavoritos {
+@Table(name="Favoritos")
+public class Favoritos {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int idLista;
+    private int idFavoritos;
 
     @Column(name = "fechaGuardado", nullable = false)
     private LocalDate fechaGuardado;
@@ -22,22 +22,22 @@ public class ListaFavoritos {
     @JoinColumn(name="idBicicleta")
     private Bicicleta bicicleta;
 
-    public ListaFavoritos() {
+    public Favoritos() {
     }
 
-    public ListaFavoritos(int idLista, LocalDate fechaGuardado, Usuario usuario, Bicicleta bicicleta) {
-        this.idLista = idLista;
+    public Favoritos(int idFavoritos, LocalDate fechaGuardado, Usuario usuario, Bicicleta bicicleta) {
+        this.idFavoritos = idFavoritos;
         this.fechaGuardado = fechaGuardado;
         this.usuario = usuario;
         this.bicicleta = bicicleta;
     }
 
     public int getIdLista() {
-        return idLista;
+        return idFavoritos;
     }
 
     public void setIdLista(int idLista) {
-        this.idLista = idLista;
+        this.idFavoritos = idLista;
     }
 
     public LocalDate getFechaGuardado() {
