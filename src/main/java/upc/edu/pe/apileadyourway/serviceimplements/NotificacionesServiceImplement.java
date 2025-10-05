@@ -9,6 +9,7 @@ import upc.edu.pe.apileadyourway.serviceinterfaces.INotificacionesService;
 
 import java.util.List;
 
+@Service
 public class NotificacionesServiceImplement implements INotificacionesService {
     @Autowired
     private INotificacionesRepository repository;
@@ -32,7 +33,6 @@ public class NotificacionesServiceImplement implements INotificacionesService {
     public List<Notificaciones> listarNotiSumi(Usuario sumi) {
         return List.of();
     }
-
 
     @Override
     public Notificaciones listaID(int id) {

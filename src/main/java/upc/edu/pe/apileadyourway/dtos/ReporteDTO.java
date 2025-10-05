@@ -7,14 +7,23 @@ import upc.edu.pe.apileadyourway.entities.Usuario;
 import java.time.LocalDate;
 
 public class ReporteDTO {
+    private int idReporte;
     private String motivo;
     private LocalDate fechaReporte;
     private String estado;
     private String tipo;
     private String mensaje;
 
-    private int idUsuario;
-    private int idBicicleta;
+    private Usuario usuario;
+    private Bicicleta bicicleta;
+
+    public int getIdReporte() {
+        return idReporte;
+    }
+
+    public void setIdReporte(int idReporte) {
+        this.idReporte = idReporte;
+    }
 
     public String getMotivo() {
         return motivo;
@@ -56,11 +65,19 @@ public class ReporteDTO {
         this.mensaje = mensaje;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public int getIdBicicleta() {
-        return idBicicleta;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Bicicleta getBicicleta() {
+        return bicicleta;
+    }
+
+    public void setBicicleta(Bicicleta bicicleta) {
+        this.bicicleta = bicicleta;
     }
 }

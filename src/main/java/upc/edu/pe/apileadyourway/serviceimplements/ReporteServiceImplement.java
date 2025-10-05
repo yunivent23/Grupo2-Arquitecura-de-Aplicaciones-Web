@@ -19,7 +19,27 @@ public class ReporteServiceImplement implements IReporteService {
     @Autowired
     IReporteRepository reporteRepository;
 
-    @Autowired
+    @Override
+    public void insertarReporte(Reporte reporte) {
+        reporteRepository.save(reporte);
+    }
+
+    @Override
+    public void editarReporte(Reporte reporte) {
+        reporteRepository.save(reporte);
+    }
+
+    @Override
+    public List<Reporte> listarReporteCliente(int idCliente) {
+        return reporteRepository.findByIdUsuario(idCliente);
+    }
+
+    @Override
+    public Reporte listaID(int id) {
+        return reporteRepository.findById(id).orElse(null);
+    }
+
+    /*@Autowired
     IUsuarioService  usuarioService;
 
     @Autowired
@@ -34,8 +54,8 @@ public class ReporteServiceImplement implements IReporteService {
         reporte.setTipo(reporteDTO.getTipo());
         reporte.setMensaje(reporteDTO.getMensaje());
 
-        Usuario usuario = usuarioService.findId(reporteDTO.getIdUsuario());
-        Bicicleta bicicleta = bicicletaService.buscarPorId(reporteDTO.getIdBicicleta());
+        Usuario usuario = usuarioService.(reporteDTO.getUsuario());
+        Bicicleta bicicleta = bicicletaService.buscarPorId(reporteDTO.getBicicleta());
 
         reporte.setUsuario(usuario);
         reporte.setBicicleta(bicicleta);
@@ -81,5 +101,7 @@ public class ReporteServiceImplement implements IReporteService {
     @Override
     public Reporte listaID(int id){
         return reporteRepository.findById(id).get();
-    }
+    }*/
+
+
 }
