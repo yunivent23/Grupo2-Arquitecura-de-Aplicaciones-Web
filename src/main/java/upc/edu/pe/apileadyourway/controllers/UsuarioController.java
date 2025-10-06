@@ -31,7 +31,7 @@ public class UsuarioController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')")
     public void insert(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
         Usuario usuario = m.map(dto, Usuario.class);
@@ -39,7 +39,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/buscar/{id}")
-    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')")
     public ResponseEntity<?> findId(@PathVariable("id") Integer id) {
         Usuario usuario = service.findId(id);
         if (usuario == null) {

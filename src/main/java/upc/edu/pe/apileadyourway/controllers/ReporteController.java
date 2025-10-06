@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.apileadyourway.dtos.ReporteDTO;
 import upc.edu.pe.apileadyourway.dtos.UsuarioDTO;
 import upc.edu.pe.apileadyourway.entities.Alquiler;
+import upc.edu.pe.apileadyourway.entities.Bicicleta;
 import upc.edu.pe.apileadyourway.entities.Reporte;
 import upc.edu.pe.apileadyourway.entities.Usuario;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IReporteService;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/reportes")
@@ -60,19 +63,38 @@ public class ReporteController {
         if (reporte == null) {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
-                    .body("No existe un usuario con el ID: " + id);
+                    .body("No existe un reporte con el ID: " + id);
         }
         ModelMapper m = new ModelMapper();
-        UsuarioDTO dto = m.map(reporte, UsuarioDTO.class);
+        ReporteDTO dto = m.map(reporte, ReporteDTO.class);
         return ResponseEntity.ok(dto);
     }
 
+    @GetMapping("/buscarCliente/{idCliente}")
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
+    public ResponseEntity<List<ReporteDTO>> findByCliente(@PathVariable("idCliente") Integer idCliente) {
+        List<Reporte> r = service.listarReporteCliente(idCliente);
+        if (r.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
+        }
 
+        ModelMapper m = new ModelMapper();
+        List<ReporteDTO> dto = r.stream()
+                .map(reporte -> m.map(reporte, ReporteDTO.class))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(dto);
+    }
 
-
-
-
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarBicicleta(@PathVariable("id") int id) {
+        Reporte r = service.listaID(id);
+        if (r == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID: " + id);
+        }
+        service.eliminarReporte(id);
+        return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
+    }
 
 
 

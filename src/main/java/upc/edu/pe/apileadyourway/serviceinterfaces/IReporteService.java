@@ -10,4 +10,5 @@ public interface IReporteService {
     void editarReporte(Reporte reporte);
     public List<Reporte> listarReporteCliente(int idCliente);
     public Reporte listaID(int id);
+    public void eliminarReporte(int id);
 }

@@ -39,6 +39,11 @@ public class ReporteServiceImplement implements IReporteService {
         return reporteRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public void eliminarReporte(int id) {
+        reporteRepository.deleteById(id);
+    }
+
     /*@Autowired
     IUsuarioService  usuarioService;
 

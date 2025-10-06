@@ -14,7 +14,7 @@ public class Role {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private Usuario usuario;
+    private Users user;
 
     public Long getId() {
         return id;
@@ -32,11 +32,11 @@ public class Role {
         this.rol = rol;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Users getUser() {
+        return user;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUser(Users user) {
+        this.user = user;
     }
 }
