@@ -80,4 +80,5 @@ public class BicicletaServiceImplement implements IBicicletaService {
                 tipo, marca, color, precioMin, precioMax, disponible, estado
         );
     }
+
 }

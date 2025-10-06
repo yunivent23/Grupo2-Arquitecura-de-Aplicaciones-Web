@@ -86,7 +86,7 @@ public class ReporteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarBicicleta(@PathVariable("id") int id) {
+    public ResponseEntity<String> eliminarReporte(@PathVariable("id") int id) {
         Reporte r = service.listaID(id);
         if (r == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)

@@ -17,4 +17,7 @@ public interface IAlquilerRepository extends JpaRepository<Alquiler,Integer> {
     List<Alquiler>findByCliente(Usuario cliente);
 
     List<Alquiler>findBySuministrador(Usuario suministrador);
+
+
+
 }

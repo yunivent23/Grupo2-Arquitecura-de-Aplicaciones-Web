@@ -8,10 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.apileadyourway.dtos.ReseniaDTO;
-import upc.edu.pe.apileadyourway.dtos.UsuarioDTO;
+import upc.edu.pe.apileadyourway.dtos.ReseniaSuministradorDTO;
 import upc.edu.pe.apileadyourway.entities.Resenia;
 import upc.edu.pe.apileadyourway.entities.Usuario;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IReseniaService;
+import upc.edu.pe.apileadyourway.serviceinterfaces.IUsuarioService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +22,9 @@ import java.util.stream.Collectors;
 public class ReseniaController {
     @Autowired
     private IReseniaService service;
+
+    @Autowired
+    private IUsuarioService uservice;
 
     @PostMapping
     @PreAuthorize("hasAuthority('CLIENTE')")
@@ -45,7 +49,7 @@ public class ReseniaController {
         return ResponseEntity.ok("Usuario con ID " + resenia.getIdResenia() + " modificado correctamente.");
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('CLIENTE')")
     public ResponseEntity<String> eliminarResenia(@PathVariable("id") Integer id){
         Resenia resenia = service.buscarPorId(id);
@@ -58,12 +62,32 @@ public class ReseniaController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<ReseniaDTO> listarTodo() {
         return service.listarTodo().stream().map(r -> {
             ModelMapper m = new ModelMapper();
             return m.map(r, ReseniaDTO.class);
         }).collect(Collectors.toList());
     }
+
+    //resenias que recibió el suministrador
+    @GetMapping("/reseniaSum/{id}")
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')")
+    public ResponseEntity<?> listarPorSuministrador(@PathVariable("id") int id) {
+        Usuario usuario =uservice.findId(id);
+        if (!usuario.getRolUsuario().equalsIgnoreCase("Suministrador")) {
+            return new ResponseEntity<>(
+                    "El usuario con ID " + id + " no es un suministrador.",
+                    HttpStatus.FORBIDDEN
+            );
+        }
+        List<ReseniaSuministradorDTO> lista = service.reseniaSuministrador(id);
+
+        return new ResponseEntity<>(lista, HttpStatus.OK);
+    }
+
+
+
 
 
 }

@@ -2,6 +2,7 @@ package upc.edu.pe.apileadyourway.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import upc.edu.pe.apileadyourway.dtos.ReseniaSuministradorDTO;
 import upc.edu.pe.apileadyourway.entities.Resenia;
 import upc.edu.pe.apileadyourway.repositories.IReseniaRepository;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IReseniaService;
@@ -37,4 +38,11 @@ public class ReseniaServiceImplement implements IReseniaService {
     public Resenia buscarPorId(int idResenia) {
         return repository.findById(idResenia).orElse(null);
     }
+
+    @Override
+    public List<ReseniaSuministradorDTO> reseniaSuministrador(int id) {
+        return repository.reseniaSuministrador(id);
+    }
+
+
 }

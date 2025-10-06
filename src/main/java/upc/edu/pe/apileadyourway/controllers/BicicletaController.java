@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.apileadyourway.dtos.BicicletaDTOListar;
 import upc.edu.pe.apileadyourway.dtos.BicicletaDTOPublicar;
@@ -21,6 +22,7 @@ public class BicicletaController {
     private IBicicletaService service;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
     public List<BicicletaDTOListar>listarTodos(){
         return service.listarTodo().stream().map(a->{
             ModelMapper m=new ModelMapper();
@@ -102,4 +104,6 @@ public class BicicletaController {
 
         return ResponseEntity.ok(dto);
     }
+
+
 }

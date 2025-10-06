@@ -1,5 +1,6 @@
 package upc.edu.pe.apileadyourway.serviceinterfaces;
 
+import upc.edu.pe.apileadyourway.dtos.ReseniaSuministradorDTO;
 import upc.edu.pe.apileadyourway.entities.Resenia;
 
 import java.util.List;
@@ -10,4 +11,5 @@ public interface IReseniaService {
     public void borrarResenia(int idResenia);
     List<Resenia> listarTodo();
     Resenia buscarPorId(int idResenia);
+    List<ReseniaSuministradorDTO> reseniaSuministrador(int id);
 }
