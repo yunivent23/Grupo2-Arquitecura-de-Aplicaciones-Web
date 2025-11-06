@@ -37,12 +37,12 @@ public class Bicicleta {
 
     @ManyToOne
     @JoinColumn(name="idUsuario")
-    private Usuario usuario;
+    private Users usuario;
 
     public Bicicleta() {
     }
 
-    public Bicicleta(int id, String descripcionBicicleta, String tipoBicicleta, String colorBicicleta, String marcaBicicleta, Double precioBicicleta, String estadoBicicleta, String ubicacionBicicleta, boolean disponible, int vistas, LocalDate fechaPublicacion, Usuario usuario, String modeloBicicleta) {
+    public Bicicleta(int id, String descripcionBicicleta, String tipoBicicleta, String colorBicicleta, String marcaBicicleta, Double precioBicicleta, String estadoBicicleta, String ubicacionBicicleta, boolean disponible, int vistas, LocalDate fechaPublicacion, Users usuario, String modeloBicicleta) {
         this.idBicicleta = id;
         this.descripcionBicicleta = descripcionBicicleta;
         this.tipoBicicleta = tipoBicicleta;
@@ -138,11 +138,11 @@ public class Bicicleta {
         this.vistas = vistas;
     }
 
-    public Usuario getUsuario() {
+    public Users getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(Users usuario) {
         this.usuario = usuario;
     }
 

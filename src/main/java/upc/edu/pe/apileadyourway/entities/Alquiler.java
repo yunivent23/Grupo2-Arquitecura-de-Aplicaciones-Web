@@ -28,17 +28,17 @@ public class Alquiler {
 
     @ManyToOne
     @JoinColumn(name="idCliente")
-    private Usuario cliente;
+    private Users cliente;
 
     @ManyToOne
     @JoinColumn(name="idSuministrador")
-    private Usuario suministrador;
+    private Users suministrador;
 
 
     public Alquiler() {
     }
 
-    public Alquiler(int idAlquiler, double precioTotal, String estadoAlquiler, LocalDate fechaInicio, Bicicleta bicicleta, LocalDate fechaFin, Usuario cliente, Usuario suministrador, String estadoPago) {
+    public Alquiler(int idAlquiler, double precioTotal, String estadoAlquiler, LocalDate fechaInicio, Bicicleta bicicleta, LocalDate fechaFin, Users cliente, Users suministrador, String estadoPago) {
         this.idAlquiler = idAlquiler;
         this.precioTotal = precioTotal;
         this.estadoAlquiler = estadoAlquiler;
@@ -98,19 +98,19 @@ public class Alquiler {
         this.bicicleta = bicicleta;
     }
 
-    public Usuario getCliente() {
+    public Users getCliente() {
         return cliente;
     }
 
-    public void setCliente(Usuario cliente) {
+    public void setCliente(Users cliente) {
         this.cliente = cliente;
     }
 
-    public Usuario getSuministrador() {
+    public Users getSuministrador() {
         return suministrador;
     }
 
-    public void setSuministrador(Usuario suministrador) {
+    public void setSuministrador(Users suministrador) {
         this.suministrador = suministrador;
     }
 

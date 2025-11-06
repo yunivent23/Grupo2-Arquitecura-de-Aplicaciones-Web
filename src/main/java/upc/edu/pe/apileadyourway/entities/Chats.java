@@ -13,12 +13,12 @@ public class Chats {
 
     @ManyToOne
     @JoinColumn(name="idUsuario")
-    private Usuario usuario;
+    private Users usuario;
 
     public Chats() {
     }
 
-    public Chats(int idChat, Usuario usuario) {
+    public Chats(int idChat, Users usuario) {
         this.idChat = idChat;
         this.usuario = usuario;
     }
@@ -31,11 +31,11 @@ public class Chats {
         this.idChat = idChat;
     }
 
-    public Usuario getUsuario() {
+    public Users getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(Users usuario) {
         this.usuario = usuario;
     }
 }

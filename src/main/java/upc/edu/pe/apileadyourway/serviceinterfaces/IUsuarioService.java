@@ -1,15 +1,16 @@
 package upc.edu.pe.apileadyourway.serviceinterfaces;
 
-import upc.edu.pe.apileadyourway.entities.Usuario;
+import upc.edu.pe.apileadyourway.dtos.UsuarioResultDTO;
+import upc.edu.pe.apileadyourway.entities.Users;
 
 import java.util.List;
 
 public interface IUsuarioService {
-    public List<Usuario> listarTodo();
-    public void insert(Usuario u);
-    public Usuario findId(int id);
-    public void delete(int id);
-    public void edit(Usuario u);
-    public List<Usuario> buscarService(String nombre);
-    public boolean validarUsuario(String correo, String password);
+    public List<Users> listarTodo();
+    public void insert(Users u);
+    public Users findId(Long id);
+    public void delete(Long id);
+    public void edit(Users u);
+    public List<UsuarioResultDTO> buscarService(String nombre);
+    public boolean validarUsuario(String correo, String contrasenia);
 }

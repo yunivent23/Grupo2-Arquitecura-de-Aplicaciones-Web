@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.apileadyourway.dtos.ReseniaDTO;
 import upc.edu.pe.apileadyourway.dtos.ReseniaSuministradorDTO;
 import upc.edu.pe.apileadyourway.entities.Resenia;
-import upc.edu.pe.apileadyourway.entities.Usuario;
+import upc.edu.pe.apileadyourway.entities.Users;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IReseniaService;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IUsuarioService;
 
@@ -73,9 +73,9 @@ public class ReseniaController {
     //resenias que recibió el suministrador
     @GetMapping("/reseniaSum/{id}")
     @PreAuthorize("hasAuthority('SUMINISTRADOR')")
-    public ResponseEntity<?> listarPorSuministrador(@PathVariable("id") int id) {
-        Usuario usuario =uservice.findId(id);
-        if (!usuario.getRolUsuario().equalsIgnoreCase("Suministrador")) {
+    public ResponseEntity<?> listarPorSuministrador(@PathVariable("id") Long id) {
+        Users usuario =uservice.findId(id);
+        if (!usuario.getRoles().equals("Suministrador")) {
             return new ResponseEntity<>(
                     "El usuario con ID " + id + " no es un suministrador.",
                     HttpStatus.FORBIDDEN

@@ -1,16 +1,16 @@
 package upc.edu.pe.apileadyourway.dtos;
 
-import upc.edu.pe.apileadyourway.entities.Usuario;
+import upc.edu.pe.apileadyourway.entities.Users;
 
 public class ChatsDTO {
     private int idChat;
-    private Usuario usuario;
+    private Users usuario;
 
-    public Usuario getUsuario() {
+    public Users getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(Users usuario) {
         this.usuario = usuario;
     }
 

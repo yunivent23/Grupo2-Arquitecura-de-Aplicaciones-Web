@@ -3,7 +3,7 @@ package upc.edu.pe.apileadyourway.serviceimplements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import upc.edu.pe.apileadyourway.entities.Notificaciones;
-import upc.edu.pe.apileadyourway.entities.Usuario;
+import upc.edu.pe.apileadyourway.entities.Users;
 import upc.edu.pe.apileadyourway.repositories.INotificacionesRepository;
 import upc.edu.pe.apileadyourway.serviceinterfaces.INotificacionesService;
 
@@ -25,12 +25,12 @@ public class NotificacionesServiceImplement implements INotificacionesService {
     }
 
     @Override
-    public List<Notificaciones> listarNotiCliente(Usuario client) {
+    public List<Notificaciones> listarNotiCliente(Users client) {
         return List.of();
     }
 
     @Override
-    public List<Notificaciones> listarNotiSumi(Usuario sumi) {
+    public List<Notificaciones> listarNotiSumi(Users sumi) {
         return List.of();
     }
 

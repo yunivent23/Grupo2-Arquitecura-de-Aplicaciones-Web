@@ -7,11 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.apileadyourway.dtos.ReporteDTO;
-import upc.edu.pe.apileadyourway.dtos.UsuarioDTO;
-import upc.edu.pe.apileadyourway.entities.Alquiler;
-import upc.edu.pe.apileadyourway.entities.Bicicleta;
 import upc.edu.pe.apileadyourway.entities.Reporte;
-import upc.edu.pe.apileadyourway.entities.Usuario;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IReporteService;
 
 import java.util.Collections;
@@ -72,7 +68,7 @@ public class ReporteController {
 
     @GetMapping("/buscarCliente/{idCliente}")
     @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
-    public ResponseEntity<List<ReporteDTO>> findByCliente(@PathVariable("idCliente") Integer idCliente) {
+    public ResponseEntity<List<ReporteDTO>> findByCliente(@PathVariable("idCliente") Long idCliente) {
         List<Reporte> r = service.listarReporteCliente(idCliente);
         if (r.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());

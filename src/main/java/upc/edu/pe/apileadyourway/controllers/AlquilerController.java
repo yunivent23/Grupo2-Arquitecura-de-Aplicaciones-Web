@@ -12,14 +12,11 @@ import upc.edu.pe.apileadyourway.dtos.AlquilerDTO;
 import upc.edu.pe.apileadyourway.dtos.AlquilerSuministradorDTO;
 import upc.edu.pe.apileadyourway.dtos.UsuarioDTO;
 import upc.edu.pe.apileadyourway.entities.Alquiler;
-import upc.edu.pe.apileadyourway.entities.Bicicleta;
-import upc.edu.pe.apileadyourway.entities.Usuario;
+import upc.edu.pe.apileadyourway.entities.Users;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IAlquilerService;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/alquileres")
@@ -36,8 +33,7 @@ public class AlquilerController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
-    public ResponseEntity<String> editar(@RequestBody AlquilerDTO dto) {
+          public ResponseEntity<String> editar(@RequestBody AlquilerDTO dto) {
         ModelMapper m = new ModelMapper();
         Alquiler a = m.map(dto, Alquiler.class);
         Alquiler existente = service.findId(a.getIdAlquiler());
@@ -65,9 +61,9 @@ public class AlquilerController {
 
     @GetMapping("/historialC/{id}")
     @PreAuthorize("hasAuthority('CLIENTE')")
-    public ResponseEntity<List<AlquilerClienteDTO>> historialAlquileresCliente(@PathVariable("id") Integer id) {
-        Usuario cliente = new Usuario();
-        cliente.setIdUsuario(id);
+    public ResponseEntity<List<AlquilerClienteDTO>> historialAlquileresCliente(@PathVariable("id") Long id) {
+        Users cliente = new Users();
+        cliente.setId(id);
 
         List<Alquiler> alquileres=service.historialAlquileresCliente(cliente);
         List<AlquilerClienteDTO>listadto=new ArrayList<>();
@@ -76,7 +72,7 @@ public class AlquilerController {
             dto.setIdAlquiler(a.getIdAlquiler());
             dto.setTipoBicicleta(a.getBicicleta().getTipoBicicleta());
             dto.setMarcaBicicleta(a.getBicicleta().getMarcaBicicleta());
-            dto.setNombreSuministrador(a.getSuministrador().getNombreUsuario());
+            dto.setNombreSuministrador(a.getSuministrador().getUsername());
             dto.setFechaInicio(a.getFechaInicio());
             dto.setFechaFin(a.getFechaFin());
             listadto.add(dto);
@@ -86,17 +82,17 @@ public class AlquilerController {
 
     @GetMapping("/historialS/{id}")
     @PreAuthorize("hasAuthority('SUMINISTRADOR')")
-    public ResponseEntity<List<AlquilerSuministradorDTO>> historialAlquileresSuministrador(@PathVariable("id") Integer id) {
-        Usuario cliente = new Usuario();
-        cliente.setIdUsuario(id);
+    public ResponseEntity<List<AlquilerSuministradorDTO>> historialAlquileresSuministrador(@PathVariable("id") Long id) {
+        Users cliente = new Users();
+        cliente.setId(id);
 
         List<Alquiler> alquileres=service.historialAlquileresSuministrador(cliente);
         List<AlquilerSuministradorDTO>listadto=new ArrayList<>();
         for(Alquiler a: alquileres){
             AlquilerSuministradorDTO dto = new AlquilerSuministradorDTO();
             dto.setIdAlquiler(a.getIdAlquiler());
-            dto.setNombreCliente(a.getCliente().getNombreUsuario());
-            dto.setEmailCliente(a.getCliente().getEmailUsuario());
+            dto.setNombreCliente(a.getCliente().getUsername());
+            dto.setEmailCliente(a.getCliente().getEmail());
             dto.setFechaInicio(a.getFechaInicio());
             dto.setFechaFin(a.getFechaFin());
             dto.setPrecioTotal((float) a.getPrecioTotal());

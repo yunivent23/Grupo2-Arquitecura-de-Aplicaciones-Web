@@ -11,5 +11,5 @@ public interface IReseniaService {
     public void borrarResenia(int idResenia);
     List<Resenia> listarTodo();
     Resenia buscarPorId(int idResenia);
-    List<ReseniaSuministradorDTO> reseniaSuministrador(int id);
+    List<ReseniaSuministradorDTO> reseniaSuministrador(Long id);
 }

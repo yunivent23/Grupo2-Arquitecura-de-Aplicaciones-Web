@@ -2,16 +2,10 @@ package upc.edu.pe.apileadyourway.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import upc.edu.pe.apileadyourway.dtos.ReporteDTO;
-import upc.edu.pe.apileadyourway.entities.Bicicleta;
 import upc.edu.pe.apileadyourway.entities.Reporte;
-import upc.edu.pe.apileadyourway.entities.Usuario;
 import upc.edu.pe.apileadyourway.repositories.IReporteRepository;
-import upc.edu.pe.apileadyourway.serviceinterfaces.IBicicletaService;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IReporteService;
-import upc.edu.pe.apileadyourway.serviceinterfaces.IUsuarioService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,7 +24,7 @@ public class ReporteServiceImplement implements IReporteService {
     }
 
     @Override
-    public List<Reporte> listarReporteCliente(int idCliente) {
+    public List<Reporte> listarReporteCliente(Long idCliente) {
         return reporteRepository.findByIdUsuario(idCliente);
     }
 

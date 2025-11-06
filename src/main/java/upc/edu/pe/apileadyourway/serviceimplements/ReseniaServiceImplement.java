@@ -40,7 +40,7 @@ public class ReseniaServiceImplement implements IReseniaService {
     }
 
     @Override
-    public List<ReseniaSuministradorDTO> reseniaSuministrador(int id) {
+    public List<ReseniaSuministradorDTO> reseniaSuministrador(Long id) {
         return repository.reseniaSuministrador(id);
     }
 

@@ -14,18 +14,18 @@ import java.util.List;
 public interface IReseniaRepository extends JpaRepository<Resenia, Integer> {
 
     @Query("SELECT new upc.edu.pe.apileadyourway.dtos.ReseniaSuministradorDTO( " +
-            "(SELECT AVG(r2.puntuacion) FROM Resenia r2 WHERE r2.alquiler.suministrador.idUsuario = :idSuministrador), " +
-            "r.fechaResenia, r.comentario, r.puntuacion, r.alquiler.cliente.nombreUsuario) " +
+            "(SELECT AVG(r2.puntuacion) FROM Resenia r2 WHERE r2.alquiler.suministrador.id = :idSuministrador), " +
+            "r.fechaResenia, r.comentario, r.puntuacion, r.alquiler.cliente.username) " +
             "FROM Resenia r " +
-            "WHERE r.alquiler.suministrador.idUsuario = :idSuministrador")
-    public List<ReseniaSuministradorDTO> reseniaSuministrador(@Param("idSuministrador") int idSuministrador);
+            "WHERE r.alquiler.suministrador.id = :idSuministrador")
+    public List<ReseniaSuministradorDTO> reseniaSuministrador(@Param("idSuministrador") Long idSuministrador);
 
-    @Query(value = "SELECT r.idResenia, r.comentario, r.puntuacion, r.fechaResenia, a.cliente.nombreUsuario " +
+    @Query(value = "SELECT r.idResenia, r.comentario, r.puntuacion, r.fechaResenia, a.cliente.username " +
             "FROM Resenia r " +
             "JOIN r.alquiler a " +
-            "WHERE a.suministrador.idUsuario = :idSuministrador " +
+            "WHERE a.suministrador.id = :idSuministrador " +
             "AND r.puntuacion = (" +
-            "   SELECT MIN(r2.puntuacion) FROM Resenia r2 JOIN r2.alquiler a2 WHERE a2.suministrador.idUsuario = :idSuministrador" +
+            "   SELECT MIN(r2.puntuacion) FROM Resenia r2 JOIN r2.alquiler a2 WHERE a2.suministrador.id = :idSuministrador" +
             ")")
-    List<ReseniaBajaDTO> obtenerReseniaMasBaja(@Param("idSuministrador") int idSuministrador);
+    List<ReseniaBajaDTO> obtenerReseniaMasBaja(@Param("idSuministrador") Long idSuministrador);
 }

@@ -31,6 +31,8 @@ public class BicicletaController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
+
     public ResponseEntity<?> buscarPorId(@PathVariable("id") Integer id) {
         Bicicleta b = service.buscarPorId(id);
         if (b == null) {
@@ -44,6 +46,8 @@ public class BicicletaController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')")
+
     public void publicarBicicleta(@RequestBody BicicletaDTOPublicar dto) {
         ModelMapper m = new ModelMapper();
         Bicicleta b = m.map(dto, Bicicleta.class);
@@ -51,6 +55,7 @@ public class BicicletaController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')")
     public ResponseEntity<String> eliminarBicicleta(@PathVariable("id") int id) {
         Bicicleta b = service.buscarPorId(id);
         if (b == null) {
@@ -62,6 +67,7 @@ public class BicicletaController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')")
     public ResponseEntity<String> editarBicicleta(@RequestBody BicicletaDTOPublicar dto) {
         ModelMapper m = new ModelMapper();
         Bicicleta b = m.map(dto, Bicicleta.class);
@@ -75,6 +81,7 @@ public class BicicletaController {
     }
 
     @GetMapping("/filtrar")
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
     public ResponseEntity<?> buscarMultiplesFiltros(
             @RequestParam(required = false) String tipo,
             @RequestParam(required = false) String marca,

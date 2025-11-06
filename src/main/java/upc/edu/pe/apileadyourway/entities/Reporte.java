@@ -27,7 +27,7 @@ public class Reporte {
 
     @ManyToOne
     @JoinColumn(name="idUsuario")
-    private Usuario usuario;
+    private Users usuario;
 
     @ManyToOne
     @JoinColumn(name="idBicicleta")
@@ -37,7 +37,7 @@ public class Reporte {
     }
 
     public Reporte(int idReporte, String motivo, LocalDate fechaReporte, String estado, String tipo,
-        String mensaje, Usuario usuario, Bicicleta bicicleta) {
+        String mensaje, Users usuario, Bicicleta bicicleta) {
         this.idReporte = idReporte;
         this.motivo = motivo;
         this.fechaReporte = fechaReporte;
@@ -95,11 +95,11 @@ public class Reporte {
         this.mensaje = mensaje;
     }
 
-    public Usuario getUsuario() {
+    public Users getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(Users usuario) {
         this.usuario = usuario;
     }
 

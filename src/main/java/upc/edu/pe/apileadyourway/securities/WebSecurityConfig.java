@@ -1,5 +1,8 @@
 package upc.edu.pe.apileadyourway.securities;
 
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -57,6 +60,24 @@ public class WebSecurityConfig {
         auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
     }
 
+    @Bean
+    public OpenAPI customOpenAPI() {
+        final String securitySchemeName = "bearerAuth";
+
+        // --- 🚨 CÓDIGO CLAVE PARA ACTIVAR EL BOTÓN AUTHORIZE 🚨 ---
+        return new OpenAPI()
+                // 1. Definir el componente de seguridad
+                .components(new Components()
+                        .addSecuritySchemes(securitySchemeName,
+                                new io.swagger.v3.oas.models.security.SecurityScheme()
+                                        .name(securitySchemeName)
+                                        .type(io.swagger.v3.oas.models.security.SecurityScheme.Type.HTTP)
+                                        .scheme("bearer")
+                                        .bearerFormat("JWT")))
+                // 2. Aplicar el requisito de seguridad globalmente
+                .addSecurityItem(new SecurityRequirement().addList(securitySchemeName));
+        // ----------------------------------------------------
+    }
 
     /*
     @Bean
@@ -82,6 +103,7 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
                         .requestMatchers("/login").permitAll()
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(e -> e.authenticationEntryPoint(jwtAuthenticationEntryPoint))
@@ -90,5 +112,6 @@ public class WebSecurityConfig {
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
+
 
 }

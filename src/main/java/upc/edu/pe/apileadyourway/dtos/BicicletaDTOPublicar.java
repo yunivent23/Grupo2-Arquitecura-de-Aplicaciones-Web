@@ -1,9 +1,6 @@
 package upc.edu.pe.apileadyourway.dtos;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import upc.edu.pe.apileadyourway.entities.Usuario;
+import upc.edu.pe.apileadyourway.entities.Users;
 
 import java.time.LocalDate;
 
@@ -20,7 +17,7 @@ public class BicicletaDTOPublicar {
     private int vistas;
     private LocalDate fechaPublicacion;
     private String modeloBicicleta;
-    private Usuario usuario;
+    private Users usuario;
 
     public int getIdBicicleta() {
         return idBicicleta;
@@ -116,5 +113,13 @@ public class BicicletaDTOPublicar {
 
     public void setModeloBicicleta(String modeloBicicleta) {
         this.modeloBicicleta = modeloBicicleta;
+    }
+
+    public Users getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Users usuario) {
+        this.usuario = usuario;
     }
 }

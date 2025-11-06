@@ -1,7 +1,6 @@
 package upc.edu.pe.apileadyourway.dtos;
 
-import jakarta.persistence.Column;
-import upc.edu.pe.apileadyourway.entities.Usuario;
+import upc.edu.pe.apileadyourway.entities.Users;
 
 import java.time.LocalDate;
 
@@ -11,7 +10,7 @@ public class NotificacionesDTO {
     private String tipo;
     private LocalDate fechaEnvio;
     private boolean leida;
-    private Usuario usuarios;
+    private Users usuarios;
 
     public int getIdNotificacion() {
         return idNotificacion;
@@ -53,11 +52,11 @@ public class NotificacionesDTO {
         this.leida = leida;
     }
 
-    public Usuario getUsuarios() {
+    public Users getUsuarios() {
         return usuarios;
     }
 
-    public void setUsuarios(Usuario usuarios) {
+    public void setUsuarios(Users usuarios) {
         this.usuarios = usuarios;
     }
 }

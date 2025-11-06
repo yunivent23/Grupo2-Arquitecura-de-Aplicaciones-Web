@@ -2,10 +2,8 @@ package upc.edu.pe.apileadyourway.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import upc.edu.pe.apileadyourway.dtos.AlquilerClienteDTO;
-import upc.edu.pe.apileadyourway.dtos.AlquilerSuministradorDTO;
 import upc.edu.pe.apileadyourway.entities.Alquiler;
-import upc.edu.pe.apileadyourway.entities.Usuario;
+import upc.edu.pe.apileadyourway.entities.Users;
 import upc.edu.pe.apileadyourway.repositories.IAlquilerRepository;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IAlquilerService;
 
@@ -35,12 +33,12 @@ public class AlquilerServiceImplement implements IAlquilerService {
     }
 
     @Override
-    public List<Alquiler> historialAlquileresCliente(Usuario cliente) {
+    public List<Alquiler> historialAlquileresCliente(Users cliente) {
         return repository.findByCliente(cliente);
     }
 
     @Override
-    public List<Alquiler> historialAlquileresSuministrador(Usuario suministrador) {
+    public List<Alquiler> historialAlquileresSuministrador(Users suministrador) {
         return repository.findBySuministrador(suministrador);
     }
 

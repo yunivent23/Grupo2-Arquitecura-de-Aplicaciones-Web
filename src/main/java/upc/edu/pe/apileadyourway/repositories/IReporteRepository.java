@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface IReporteRepository extends JpaRepository<Reporte, Integer> {
 
-    @Query(value="SELECT r FROM Reporte r WHERE r.usuario.idUsuario = :idUsuario")
-    List<Reporte> findByIdUsuario(@Param("idUsuario") int idUsuario);
+    @Query(value="SELECT r FROM Reporte r WHERE r.usuario.id = :idUsuario")
+    List<Reporte> findByIdUsuario(@Param("idUsuario") Long idUsuario);
 }

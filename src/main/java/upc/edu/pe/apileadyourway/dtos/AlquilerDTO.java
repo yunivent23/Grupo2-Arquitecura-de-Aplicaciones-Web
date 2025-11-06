@@ -1,10 +1,7 @@
 package upc.edu.pe.apileadyourway.dtos;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import upc.edu.pe.apileadyourway.entities.Bicicleta;
-import upc.edu.pe.apileadyourway.entities.Usuario;
+import upc.edu.pe.apileadyourway.entities.Users;
 
 import java.time.LocalDate;
 
@@ -16,8 +13,8 @@ public class AlquilerDTO {
     private LocalDate fechaFin;
     private String estadoPago;
     private Bicicleta bicicleta;
-    private Usuario cliente;
-    private Usuario suministrador;
+    private Users cliente;
+    private Users suministrador;
 
 
     public int getIdAlquiler() {
@@ -76,19 +73,19 @@ public class AlquilerDTO {
         this.bicicleta = bicicleta;
     }
 
-    public Usuario getCliente() {
+    public Users getCliente() {
         return cliente;
     }
 
-    public void setCliente(Usuario cliente) {
+    public void setCliente(Users cliente) {
         this.cliente = cliente;
     }
 
-    public Usuario getSuministrador() {
+    public Users getSuministrador() {
         return suministrador;
     }
 
-    public void setSuministrador(Usuario suministrador) {
+    public void setSuministrador(Users suministrador) {
         this.suministrador = suministrador;
     }
 }

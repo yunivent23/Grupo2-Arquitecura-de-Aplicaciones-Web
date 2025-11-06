@@ -2,7 +2,7 @@ package upc.edu.pe.apileadyourway.dtos;
 
 
 import upc.edu.pe.apileadyourway.entities.Bicicleta;
-import upc.edu.pe.apileadyourway.entities.Usuario;
+import upc.edu.pe.apileadyourway.entities.Users;
 
 import java.time.LocalDate;
 
@@ -14,7 +14,7 @@ public class ReporteDTO {
     private String tipo;
     private String mensaje;
 
-    private Usuario usuario;
+    private Users usuario;
     private Bicicleta bicicleta;
 
     public int getIdReporte() {
@@ -65,11 +65,11 @@ public class ReporteDTO {
         this.mensaje = mensaje;
     }
 
-    public Usuario getUsuario() {
+    public Users getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(Users usuario) {
         this.usuario = usuario;
     }
 

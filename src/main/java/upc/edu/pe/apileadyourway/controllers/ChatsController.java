@@ -8,7 +8,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.apileadyourway.dtos.ChatsDTO;
 import upc.edu.pe.apileadyourway.entities.Chats;
-import upc.edu.pe.apileadyourway.entities.Usuario;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IChatsService;
 
 @RestController

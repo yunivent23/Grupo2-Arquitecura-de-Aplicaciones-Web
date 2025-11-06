@@ -6,6 +6,8 @@ import java.time.LocalDate;
 
 public class UsuarioDTO {
 
+
+    private int idUsuario;
     private String nombreUsuario;
     private String dniUsuario;
     private String emailUsuario;
@@ -14,8 +16,8 @@ public class UsuarioDTO {
     private String rolUsuario;
     private String telefonoUsuario;
     private String direccionUsuario;
-    private int idUsuario;   // para edit o delete
     private String contrasenia;
+
 
 
     public String getNombreUsuario() {
