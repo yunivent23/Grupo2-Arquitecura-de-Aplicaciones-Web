@@ -18,6 +18,7 @@ public class BicicletaDTOPublicar {
     private LocalDate fechaPublicacion;
     private String modeloBicicleta;
     private Users usuario;
+    private String fotoBicicleta;
 
     public int getIdBicicleta() {
         return idBicicleta;
@@ -121,5 +122,13 @@ public class BicicletaDTOPublicar {
 
     public void setUsuario(Users usuario) {
         this.usuario = usuario;
+    }
+
+    public String getFotoBicicleta() {
+        return fotoBicicleta;
+    }
+
+    public void setFotoBicicleta(String fotoBicicleta) {
+        this.fotoBicicleta = fotoBicicleta;
     }
 }

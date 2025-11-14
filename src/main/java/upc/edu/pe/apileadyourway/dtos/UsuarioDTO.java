@@ -2,101 +2,110 @@ package upc.edu.pe.apileadyourway.dtos;
 
 import jakarta.persistence.Column;
 
+import java.security.SecureRandom;
 import java.time.LocalDate;
 
 public class UsuarioDTO {
 
 
-    private int idUsuario;
-    private String nombreUsuario;
-    private String dniUsuario;
-    private String emailUsuario;
-    private LocalDate fechaRegistro;
-    private String estadoUsuario;
-    private String rolUsuario;
-    private String telefonoUsuario;
-    private String direccionUsuario;
-    private String contrasenia;
+    private int id;
+    private String username;
+    private String dni;
+    private String email;
+    private LocalDate fecha;
+    private Boolean enabled;
+    private String roles;
+    private String telefono;
+    private String direccion;
+    private String password;
+    private String fotoUsuario;
 
 
-
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    public int getId() {
+        return id;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getDniUsuario() {
-        return dniUsuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setDniUsuario(String dniUsuario) {
-        this.dniUsuario = dniUsuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getEmailUsuario() {
-        return emailUsuario;
+    public String getDni() {
+        return dni;
     }
 
-    public void setEmailUsuario(String emailUsuario) {
-        this.emailUsuario = emailUsuario;
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
-    public LocalDate getFechaRegistro() {
-        return fechaRegistro;
+    public String getEmail() {
+        return email;
     }
 
-    public void setFechaRegistro(LocalDate fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getEstadoUsuario() {
-        return estadoUsuario;
+    public LocalDate getFecha() {
+        return fecha;
     }
 
-    public void setEstadoUsuario(String estadoUsuario) {
-        this.estadoUsuario = estadoUsuario;
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
 
-    public String isRolUsuario() {
-        return rolUsuario;
+    public Boolean getEnabled() {
+        return enabled;
     }
 
-    public void setRolUsuario(String rolUsuario) {
-        this.rolUsuario = rolUsuario;
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
-    public String getTelefonoUsuario() {
-        return telefonoUsuario;
+    public String getRoles() {
+        return roles;
     }
 
-    public void setTelefonoUsuario(String telefonoUsuario) {
-        this.telefonoUsuario = telefonoUsuario;
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
-    public String getDireccionUsuario() {
-        return direccionUsuario;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setDireccionUsuario(String direccionUsuario) {
-        this.direccionUsuario = direccionUsuario;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
-    public String getContrasenia() {
-        return contrasenia;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public String getPassword() {
+        return password;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFotoUsuario() {
+        return fotoUsuario;
+    }
+
+    public void setFotoUsuario(String fotoUsuario) {
+        this.fotoUsuario = fotoUsuario;
     }
 }

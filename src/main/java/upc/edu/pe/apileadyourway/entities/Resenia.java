@@ -16,6 +16,8 @@ public class Resenia {
     private String comentario;
     @Column(name = "fechaResenia",nullable = false)
     private LocalDate fechaResenia;
+    @Column(name = "fotoResenia",length = 40)
+    private String fotoResenia;
 
     @ManyToOne
     @JoinColumn(name="idAlquiler")
@@ -24,11 +26,12 @@ public class Resenia {
     public Resenia() {
     }
 
-    public Resenia(int idResenia, int puntuacion, String comentario, LocalDate fechaResenia, Alquiler alquiler) {
+    public Resenia(int idResenia, int puntuacion, String comentario, LocalDate fechaResenia, String fotoResenia, Alquiler alquiler) {
         this.idResenia = idResenia;
         this.puntuacion = puntuacion;
         this.comentario = comentario;
         this.fechaResenia = fechaResenia;
+        this.fotoResenia = fotoResenia;
         this.alquiler = alquiler;
     }
 
@@ -70,5 +73,13 @@ public class Resenia {
 
     public void setAlquiler(Alquiler alquiler) {
         this.alquiler = alquiler;
+    }
+
+    public String getFotoResenia() {
+        return fotoResenia;
+    }
+
+    public void setFotoResenia(String fotoResenia) {
+        this.fotoResenia = fotoResenia;
     }
 }

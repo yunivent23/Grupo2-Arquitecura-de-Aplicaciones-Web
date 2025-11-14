@@ -34,6 +34,8 @@ public class Bicicleta {
     private LocalDate fechaPublicacion;
     @Column(name = "modeloBicicleta",length = 50, nullable = false)
     private String modeloBicicleta;
+    @Column(name = "fotoBicicleta",length = 40)
+    private String fotoBicicleta;
 
     @ManyToOne
     @JoinColumn(name="idUsuario")
@@ -42,20 +44,21 @@ public class Bicicleta {
     public Bicicleta() {
     }
 
-    public Bicicleta(int id, String descripcionBicicleta, String tipoBicicleta, String colorBicicleta, String marcaBicicleta, Double precioBicicleta, String estadoBicicleta, String ubicacionBicicleta, boolean disponible, int vistas, LocalDate fechaPublicacion, Users usuario, String modeloBicicleta) {
-        this.idBicicleta = id;
+    public Bicicleta(int idBicicleta, String descripcionBicicleta, String tipoBicicleta, String marcaBicicleta, String colorBicicleta, String estadoBicicleta, Double precioBicicleta, String ubicacionBicicleta, boolean disponible, int vistas, String modeloBicicleta, LocalDate fechaPublicacion, String fotoBicicleta, Users usuario) {
+        this.idBicicleta = idBicicleta;
         this.descripcionBicicleta = descripcionBicicleta;
         this.tipoBicicleta = tipoBicicleta;
-        this.colorBicicleta = colorBicicleta;
         this.marcaBicicleta = marcaBicicleta;
-        this.precioBicicleta = precioBicicleta;
+        this.colorBicicleta = colorBicicleta;
         this.estadoBicicleta = estadoBicicleta;
+        this.precioBicicleta = precioBicicleta;
         this.ubicacionBicicleta = ubicacionBicicleta;
         this.disponible = disponible;
         this.vistas = vistas;
+        this.modeloBicicleta = modeloBicicleta;
         this.fechaPublicacion = fechaPublicacion;
         this.usuario = usuario;
-        this.modeloBicicleta=modeloBicicleta;
+        this.fotoBicicleta = fotoBicicleta;
     }
 
     public int getIdBicicleta() {
@@ -161,5 +164,13 @@ public class Bicicleta {
 
     public void setModeloBicicleta(String modeloBicicleta) {
         this.modeloBicicleta = modeloBicicleta;
+    }
+
+    public String getFotoBicicleta() {
+        return fotoBicicleta;
+    }
+
+    public void setFotoBicicleta(String fotoBicicleta) {
+        this.fotoBicicleta = fotoBicicleta;
     }
 }

@@ -13,6 +13,7 @@ import upc.edu.pe.apileadyourway.entities.Users;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IUsuarioService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -24,11 +25,8 @@ public class UsuarioController {
 
     @GetMapping
     @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
-    public List<UsuarioDTO> listar() {
-        return service.listarTodo().stream().map(u -> {
-            ModelMapper m = new ModelMapper();
-            return m.map(u, UsuarioDTO.class);
-        }).collect(Collectors.toList());
+    public List<UsuarioResultDTO> listar() {
+        return service.listarTodo();
     }
 
     @PostMapping
@@ -36,27 +34,27 @@ public class UsuarioController {
     public void insert(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
         Users usuario = m.map(dto, Users.class);
+        usuario.setId(null);
         service.insert(usuario);
     }
 
     @GetMapping("/buscar/{id}")
     @PreAuthorize("hasAuthority('SUMINISTRADOR')")
         public ResponseEntity<?> findId(@PathVariable("id") Long id) {
-        Users usuario = service.findId(id);
-        if (usuario == null) {
+        Optional<UsuarioResultDTO> dto = service.findId(id);
+
+        if (dto == null) {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body("No existe un usuario con el ID: " + id);
         }
-        ModelMapper m = new ModelMapper();
-        UsuarioDTO dto = m.map(usuario, UsuarioDTO.class);
         return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
-        Users usuario = service.findId(id);
+        Users usuario = service.listId(id);
         if (usuario == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No existe un usuario con el ID: " + id);
@@ -68,15 +66,20 @@ public class UsuarioController {
     @PutMapping
     @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
     public ResponseEntity<String> edit(@RequestBody UsuarioDTO dto) {
-        ModelMapper m = new ModelMapper();
-        Users u = m.map(dto, Users.class);
-        Users existente = service.findId(u.getId());
+        if (dto.getId() == 0) {
+            return ResponseEntity.badRequest().body("El ID del usuario es obligatorio para la edición.");
+        }
+        Users existente = service.listId((long)dto.getId());
+
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se puede modificar. No existe un usuario con el ID: " + u.getId());
+                    .body("No se puede modificar. No existe un usuario con el ID: " + dto.getId());
         }
-        service.edit(u);
-        return ResponseEntity.ok("Usuario con ID " + u.getId() + " modificado correctamente.");
+
+        ModelMapper m = new ModelMapper();
+        m.map(dto, existente);
+        service.edit(existente);
+        return ResponseEntity.ok("Usuario con ID " + existente.getId() + " modificado correctamente.");
     }
 
     @GetMapping("/busquedas")

@@ -10,10 +10,17 @@ import upc.edu.pe.apileadyourway.dtos.UsuarioResultDTO;
 import upc.edu.pe.apileadyourway.entities.Users;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface IUsersRepository extends JpaRepository<Users, Long> {
     public Users findOneByUsername(String username);
+
+
+    List<UsuarioResultDTO> findAllProjectedBy();
+
+    Optional<UsuarioResultDTO> findProjectedById(Long id);
+
 
     //BUSCAR POR NOMBRE
     @Query("select count(u.username) from Users u where u.username =:username")

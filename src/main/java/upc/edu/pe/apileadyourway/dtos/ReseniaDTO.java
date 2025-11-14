@@ -11,6 +11,9 @@ public class ReseniaDTO {
     private String comentario;
     private LocalDate fechaResenia;
     private Alquiler alquiler;
+    private String fotoResenia;
+    public ReseniaDTO() {
+    }
 
     public int getIdResenia() {
         return idResenia;
@@ -50,5 +53,13 @@ public class ReseniaDTO {
 
     public void setAlquiler(Alquiler alquiler) {
         this.alquiler = alquiler;
+    }
+
+    public String getFotoResenia() {
+        return fotoResenia;
+    }
+
+    public void setFotoResenia(String fotoResenia) {
+        this.fotoResenia = fotoResenia;
     }
 }

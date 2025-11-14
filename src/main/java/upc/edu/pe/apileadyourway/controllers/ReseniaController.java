@@ -74,7 +74,7 @@ public class ReseniaController {
     @GetMapping("/reseniaSum/{id}")
     @PreAuthorize("hasAuthority('SUMINISTRADOR')")
     public ResponseEntity<?> listarPorSuministrador(@PathVariable("id") Long id) {
-        Users usuario =uservice.findId(id);
+        Users usuario =uservice.listId(id);
         if (!usuario.getRoles().equals("Suministrador")) {
             return new ResponseEntity<>(
                     "El usuario con ID " + id + " no es un suministrador.",

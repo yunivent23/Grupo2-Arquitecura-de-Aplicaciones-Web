@@ -1,6 +1,7 @@
 package upc.edu.pe.apileadyourway.serviceimplements;
 
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import upc.edu.pe.apileadyourway.dtos.UsuarioResultDTO;
@@ -9,6 +10,7 @@ import upc.edu.pe.apileadyourway.repositories.IUsersRepository;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IUsuarioService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioServiceImplement implements IUsuarioService {
@@ -16,16 +18,25 @@ public class UsuarioServiceImplement implements IUsuarioService {
     private IUsersRepository repository;
 
     @Override
-    public List<Users> listarTodo(){return repository.findAll();};
+    public List<UsuarioResultDTO> listarTodo(){return repository.findAllProjectedBy();}
+
+    @Override
+    public Users listId(Long id) {
+        return repository.findById(id).orElse(null);
+    }
 
     @Override
     public void insert(Users u){repository.save(u);};
 
     @Override
-    public Users findId(Long id){return repository.findById(id).orElse(null);};
+    public Optional<UsuarioResultDTO> findId(Long id){return Optional.ofNullable(repository.findProjectedById(id).orElse(null));};
 
     @Override
-    public void delete(Long id){repository.deleteById(id);};
+    public void delete(Long id){
+        Users userToDelete = repository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
+
+        repository.delete(userToDelete);};
 
     @Override
     public void edit(Users u){repository.save(u);};

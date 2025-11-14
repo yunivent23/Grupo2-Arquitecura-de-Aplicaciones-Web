@@ -4,11 +4,13 @@ import upc.edu.pe.apileadyourway.dtos.UsuarioResultDTO;
 import upc.edu.pe.apileadyourway.entities.Users;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IUsuarioService {
-    public List<Users> listarTodo();
+    public List<UsuarioResultDTO> listarTodo();
+    public Users listId(Long id);
     public void insert(Users u);
-    public Users findId(Long id);
+    public Optional<UsuarioResultDTO> findId(Long id);
     public void delete(Long id);
     public void edit(Users u);
     public List<UsuarioResultDTO> buscarService(String nombre);

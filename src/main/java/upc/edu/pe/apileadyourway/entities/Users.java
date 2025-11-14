@@ -28,8 +28,10 @@ public class Users implements Serializable {
     private String telefono;
     @Column(name = "direccion",length = 40,nullable = false)
     private String direccion;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @Column(name = "fotoUsuario",length = 40,nullable = false)
+    private String fotoUsuario;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Role> roles;
 
     public Long getId() {
@@ -110,5 +112,13 @@ public class Users implements Serializable {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getFotoUsuario() {
+        return fotoUsuario;
+    }
+
+    public void setFotoUsuario(String fotoUsuario) {
+        this.fotoUsuario = fotoUsuario;
     }
 }
