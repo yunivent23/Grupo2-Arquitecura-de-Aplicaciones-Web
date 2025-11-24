@@ -21,8 +21,6 @@ public class BicicletaController {
     @Autowired
     private IBicicletaService service;
 
-    @GetMapping
-    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
     public List<BicicletaDTOListar>listarTodos(){
         return service.listarTodo().stream().map(a->{
             ModelMapper m=new ModelMapper();

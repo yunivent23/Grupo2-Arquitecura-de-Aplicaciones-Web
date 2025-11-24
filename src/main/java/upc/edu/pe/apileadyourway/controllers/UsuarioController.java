@@ -24,7 +24,6 @@ public class UsuarioController {
     private IUsuarioService service;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
     public List<UsuarioResultDTO> listar() {
         return service.listarTodo();
     }

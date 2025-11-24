@@ -40,7 +40,8 @@ public interface IUsersRepository extends JpaRepository<Users, Long> {
             "u.email AS email, " +
             "u.fecha AS fecha, " +
             "u.roles AS rol, " +
-            "u.direccion AS direccion " +
+            "u.direccion AS direccion, " +
+            "u.foto_usuario AS fotoUsuario " +
             "FROM Users u " +
             "WHERE u.nombre_usuario ILIKE CONCAT('%', :nombre, '%')",
             nativeQuery = true)

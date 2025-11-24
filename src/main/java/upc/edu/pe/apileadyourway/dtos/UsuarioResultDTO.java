@@ -15,4 +15,5 @@ public interface UsuarioResultDTO {
     @Value("#{target.roles[0].rol}")
     String getRoles();
     String getDireccion();
+    String getFotoUsuario();
 }
