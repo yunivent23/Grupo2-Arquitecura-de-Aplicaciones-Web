@@ -63,6 +63,7 @@ public class UsuarioController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('ADMIN')")
     public ResponseEntity<String> edit(@RequestBody UsuarioDTO dto) {
         if (dto.getId() == 0) {
             return ResponseEntity.badRequest().body("El ID del usuario es obligatorio para la edición.");
@@ -81,6 +82,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/busquedas")
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('ADMIN')||hasAuthority('CLIENTE')")
     public ResponseEntity<?> buscarPorNombre(@RequestParam String nombre) {
 
         List<UsuarioResultDTO> usuarios = service.buscarPorNombre(nombre);
@@ -92,6 +94,7 @@ public class UsuarioController {
 
         return ResponseEntity.ok(usuarios);
     }
+
 
     @GetMapping("/suministradores")
     public List<UsuarioResultDTO> listarSuministradores() {

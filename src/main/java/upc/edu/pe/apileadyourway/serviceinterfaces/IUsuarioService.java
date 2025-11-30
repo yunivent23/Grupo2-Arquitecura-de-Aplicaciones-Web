@@ -1,5 +1,6 @@
 package upc.edu.pe.apileadyourway.serviceinterfaces;
 
+import upc.edu.pe.apileadyourway.dtos.UsuarioDTO;
 import upc.edu.pe.apileadyourway.dtos.UsuarioResultDTO;
 import upc.edu.pe.apileadyourway.entities.Users;
 
@@ -16,4 +17,5 @@ public interface IUsuarioService {
     public List<UsuarioResultDTO> buscarPorNombre(String nombre);
     public boolean validarUsuario(String correo, String contrasenia);
     List<UsuarioResultDTO> listarSuministradoresDTO();
+
 }

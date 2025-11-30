@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import upc.edu.pe.apileadyourway.dtos.UsuarioDTO;
 import upc.edu.pe.apileadyourway.dtos.UsuarioResultDTO;
 import upc.edu.pe.apileadyourway.entities.Users;
 
@@ -35,6 +36,7 @@ public interface IUsersRepository extends JpaRepository<Users, Long> {
 
     @Query("SELECT u FROM Users u WHERE LOWER(u.username) LIKE LOWER(CONCAT('%', :nombre, '%'))")
     List<UsuarioResultDTO> buscarPorNombre(@Param("nombre") String nombre);
+
 
     @Query("SELECT u FROM Users u JOIN u.roles r WHERE r.rol = 'SUMINISTRADOR'")
     List<UsuarioResultDTO> listarSuministradoresDTO();
