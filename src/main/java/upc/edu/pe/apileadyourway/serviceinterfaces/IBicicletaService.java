@@ -10,13 +10,6 @@ public interface IBicicletaService {
     public void editarBicicleta(Bicicleta bicicleta);
     public void eliminarBicicleta(int id);
     public Bicicleta buscarPorId(int id);
-    //List<Bicicleta> buscarPorPalabra(String palabra);
-    /*List<Bicicleta> buscarPorTipo(String tipo);
-    List<Bicicleta> buscarPorMarca(String marca);
-    List<Bicicleta> buscarPorColor(String color);
-    List<Bicicleta> buscarPorEstado(String estado);
-    List<Bicicleta> buscarPorRangoDePrecio(double precioMin, double precioMax);
-    List<Bicicleta> buscarPorDisponibilidad(boolean disponible);*/
     public List<Bicicleta> buscarMultiplesFiltros(
             String tipo,
             String marca,

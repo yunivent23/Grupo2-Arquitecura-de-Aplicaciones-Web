@@ -39,7 +39,7 @@ public class UsuarioController {
 
     @GetMapping("/buscar/{id}")
     @PreAuthorize("hasAuthority('SUMINISTRADOR')")
-        public ResponseEntity<?> findId(@PathVariable("id") Long id) {
+    public ResponseEntity<?> findId(@PathVariable("id") Long id) {
         Optional<UsuarioResultDTO> dto = service.findId(id);
 
         if (dto == null) {
@@ -63,12 +63,11 @@ public class UsuarioController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
     public ResponseEntity<String> edit(@RequestBody UsuarioDTO dto) {
         if (dto.getId() == 0) {
             return ResponseEntity.badRequest().body("El ID del usuario es obligatorio para la edición.");
         }
-        Users existente = service.listId((long)dto.getId());
+        Users existente = service.listId((long) dto.getId());
 
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -83,39 +82,22 @@ public class UsuarioController {
 
     @GetMapping("/busquedas")
     public ResponseEntity<?> buscarPorNombre(@RequestParam String nombre) {
-        List<UsuarioResultDTO> usuarios = service.buscarService(nombre);
+
+        List<UsuarioResultDTO> usuarios = service.buscarPorNombre(nombre);
+
         if (usuarios.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No se encontraron usuarios con el nombre: " + nombre);
         }
-        List<UsuarioResultDTO> listaDTO = usuarios.stream().map(u -> {
-            ModelMapper m = new ModelMapper();
-            return m.map(u, UsuarioResultDTO.class);
-        }).collect(Collectors.toList());
-        return ResponseEntity.ok(listaDTO);
+
+        return ResponseEntity.ok(usuarios);
     }
 
-    //------LOGIN------
-    @GetMapping("/login")
-    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
-    public ResponseEntity<String> login(@RequestParam("correo") String correo, @RequestParam("password") String password) {
-        boolean valido = service.validarUsuario(correo, password);
-
-        if (valido){
-            return ResponseEntity.ok("¡Credenciales verificadas!");
-        }else{
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+    @GetMapping("/suministradores")
+    public List<UsuarioResultDTO> listarSuministradores() {
+        return service.listarSuministradoresDTO();
     }
 
-    @PostMapping("/login")
-    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
-    public ResponseEntity<String> login(@RequestBody UsuarioLoginDTO dto) {
-        boolean valido = service.validarUsuario(dto.getEmailUsuario(), dto.getContrasenia());
-        if (valido){
-            return ResponseEntity.ok("¡Credenciales verificadas! Bienvenido"+ dto.getNombreUsuario());
-        }else{
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-    }
+
+
 }

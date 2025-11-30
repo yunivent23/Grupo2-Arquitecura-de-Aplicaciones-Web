@@ -17,7 +17,7 @@ public class BicicletaDTOPublicar {
     private int vistas;
     private LocalDate fechaPublicacion;
     private String modeloBicicleta;
-    private Users usuario;
+    private Long usuarioId;
     private String fotoBicicleta;
 
     public int getIdBicicleta() {
@@ -116,12 +116,12 @@ public class BicicletaDTOPublicar {
         this.modeloBicicleta = modeloBicicleta;
     }
 
-    public Users getUsuario() {
-        return usuario;
+    public Long getUsuarioId() {
+        return usuarioId;
     }
 
-    public void setUsuario(Users usuario) {
-        this.usuario = usuario;
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
     public String getFotoBicicleta() {

@@ -7,10 +7,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import upc.edu.pe.apileadyourway.dtos.BicicletaCardDTO;
 import upc.edu.pe.apileadyourway.dtos.BicicletaDTOListar;
 import upc.edu.pe.apileadyourway.dtos.BicicletaDTOPublicar;
 import upc.edu.pe.apileadyourway.entities.Bicicleta;
+import upc.edu.pe.apileadyourway.entities.Users;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IBicicletaService;
+import upc.edu.pe.apileadyourway.serviceinterfaces.IUsuarioService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,11 +23,14 @@ import java.util.stream.Collectors;
 public class BicicletaController {
     @Autowired
     private IBicicletaService service;
+    @Autowired
+    private IUsuarioService uservice;
 
-    public List<BicicletaDTOListar>listarTodos(){
+    @GetMapping
+    public List<BicicletaCardDTO>listarTodos(){
         return service.listarTodo().stream().map(a->{
             ModelMapper m=new ModelMapper();
-            return m.map(a,BicicletaDTOListar.class);
+            return m.map(a, BicicletaCardDTO.class);
         }).collect(Collectors.toList());
     }
 
@@ -45,10 +51,12 @@ public class BicicletaController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('SUMINISTRADOR')")
-
     public void publicarBicicleta(@RequestBody BicicletaDTOPublicar dto) {
         ModelMapper m = new ModelMapper();
         Bicicleta b = m.map(dto, Bicicleta.class);
+        Users u = uservice.listId(dto.getUsuarioId());
+        b.setUsuario(u);
+
         service.publicarBicicleta(b);
     }
 
@@ -65,7 +73,7 @@ public class BicicletaController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('SUMINISTRADOR')")
+    //@PreAuthorize("hasAuthority('SUMINISTRADOR')")
     public ResponseEntity<String> editarBicicleta(@RequestBody BicicletaDTOPublicar dto) {
         ModelMapper m = new ModelMapper();
         Bicicleta b = m.map(dto, Bicicleta.class);

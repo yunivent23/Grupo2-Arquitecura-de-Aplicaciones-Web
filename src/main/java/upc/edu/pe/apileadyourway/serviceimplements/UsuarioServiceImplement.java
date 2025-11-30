@@ -41,12 +41,19 @@ public class UsuarioServiceImplement implements IUsuarioService {
     @Override
     public void edit(Users u){repository.save(u);};
 
-    @Override
-    public List<UsuarioResultDTO> buscarService(String nombre){return repository.buscarPorNombre(nombre);}
+    public List<UsuarioResultDTO> buscarPorNombre(String nombre) {
+        return repository.buscarPorNombre(nombre);
+    }
 
     @Override
     public boolean validarUsuario(String correo, String contrasenia) {
         return repository.validarLogin(correo, contrasenia);
+    }
+
+
+    @Override
+    public List<UsuarioResultDTO> listarSuministradoresDTO() {
+        return repository.listarSuministradoresDTO();
     }
 
 

@@ -19,8 +19,8 @@ public class Alquiler {
     private LocalDate fechaInicio;
     @Column(name = "fechaFin",nullable = false)
     private LocalDate fechaFin;
-    @Column(name = "estadoPago", length = 50, nullable = false)
-    private String estadoPago;
+    @Column(name = "estadoPago", nullable = false)
+    private boolean estadoPago;
 
     @ManyToOne
     @JoinColumn(name="idBicicleta")
@@ -38,7 +38,7 @@ public class Alquiler {
     public Alquiler() {
     }
 
-    public Alquiler(int idAlquiler, double precioTotal, String estadoAlquiler, LocalDate fechaInicio, Bicicleta bicicleta, LocalDate fechaFin, Users cliente, Users suministrador, String estadoPago) {
+    public Alquiler(int idAlquiler, double precioTotal, String estadoAlquiler, LocalDate fechaInicio, Bicicleta bicicleta, LocalDate fechaFin, Users cliente, Users suministrador, boolean estadoPago) {
         this.idAlquiler = idAlquiler;
         this.precioTotal = precioTotal;
         this.estadoAlquiler = estadoAlquiler;
@@ -114,11 +114,11 @@ public class Alquiler {
         this.suministrador = suministrador;
     }
 
-    public String getEstadoPago() {
+    public boolean getEstadoPago() {
         return estadoPago;
     }
 
-    public void setEstadoPago(String estadoPago) {
+    public void setEstadoPago(boolean estadoPago) {
         this.estadoPago = estadoPago;
     }
 }

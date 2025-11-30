@@ -33,19 +33,11 @@ public interface IUsersRepository extends JpaRepository<Users, Long> {
     @Query(value = "insert into roles (rol, user_id) VALUES (:rol, :user_id)", nativeQuery = true)
     public void insRol(@Param("rol") String authority, @Param("user_id") Long user_id);
 
-    @Query(value = "SELECT " +
-            "u.id AS id, " +
-            "u.username AS username, " +
-            "u.telefono AS telefono, " +
-            "u.email AS email, " +
-            "u.fecha AS fecha, " +
-            "u.roles AS rol, " +
-            "u.direccion AS direccion, " +
-            "u.foto_usuario AS fotoUsuario " +
-            "FROM Users u " +
-            "WHERE u.nombre_usuario ILIKE CONCAT('%', :nombre, '%')",
-            nativeQuery = true)
+    @Query("SELECT u FROM Users u WHERE LOWER(u.username) LIKE LOWER(CONCAT('%', :nombre, '%'))")
     List<UsuarioResultDTO> buscarPorNombre(@Param("nombre") String nombre);
+
+    @Query("SELECT u FROM Users u JOIN u.roles r WHERE r.rol = 'SUMINISTRADOR'")
+    List<UsuarioResultDTO> listarSuministradoresDTO();
 
     @Query(value="SELECT EXISTS(SELECT 1\n" +
             "FROM users\n" +

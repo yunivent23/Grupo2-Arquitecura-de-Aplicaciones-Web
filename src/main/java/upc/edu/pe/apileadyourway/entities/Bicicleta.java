@@ -34,7 +34,7 @@ public class Bicicleta {
     private LocalDate fechaPublicacion;
     @Column(name = "modeloBicicleta",length = 50, nullable = false)
     private String modeloBicicleta;
-    @Column(name = "fotoBicicleta",length = 40)
+    @Column(name = "fotoBicicleta",length = 200)
     private String fotoBicicleta;
 
     @ManyToOne

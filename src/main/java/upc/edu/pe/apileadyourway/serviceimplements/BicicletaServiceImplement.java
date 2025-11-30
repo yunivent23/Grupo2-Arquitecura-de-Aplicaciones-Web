@@ -3,6 +3,7 @@ package upc.edu.pe.apileadyourway.serviceimplements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import upc.edu.pe.apileadyourway.entities.Bicicleta;
+import upc.edu.pe.apileadyourway.entities.Users;
 import upc.edu.pe.apileadyourway.repositories.IBicicletaRepository;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IBicicletaService;
 
@@ -24,6 +25,10 @@ public class BicicletaServiceImplement implements IBicicletaService {
     }
     @Override
     public void publicarBicicleta(Bicicleta bicicleta) {
+        /*Users u = repository.findById(bicicleta.getUsuario().getId())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        bicicleta.setUsuario(u);*/
         repository.save(bicicleta);
     }
 

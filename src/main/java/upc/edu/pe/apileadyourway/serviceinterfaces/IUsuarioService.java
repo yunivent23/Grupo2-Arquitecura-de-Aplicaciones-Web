@@ -13,6 +13,7 @@ public interface IUsuarioService {
     public Optional<UsuarioResultDTO> findId(Long id);
     public void delete(Long id);
     public void edit(Users u);
-    public List<UsuarioResultDTO> buscarService(String nombre);
+    public List<UsuarioResultDTO> buscarPorNombre(String nombre);
     public boolean validarUsuario(String correo, String contrasenia);
+    List<UsuarioResultDTO> listarSuministradoresDTO();
 }
