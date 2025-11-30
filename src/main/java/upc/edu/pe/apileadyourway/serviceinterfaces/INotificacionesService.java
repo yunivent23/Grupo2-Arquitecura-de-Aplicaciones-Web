@@ -12,4 +12,6 @@ public interface INotificacionesService {
     public List<Notificaciones> listarNotiSumi(Users sumi);
     public Notificaciones listaID(int id);
 
+    public List<Notificaciones> listarPorUsuario(int idUsuario);
+
 }

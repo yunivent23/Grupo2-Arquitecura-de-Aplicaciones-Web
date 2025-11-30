@@ -1,10 +1,12 @@
 package upc.edu.pe.apileadyourway.serviceinterfaces;
 
+import upc.edu.pe.apileadyourway.entities.Bicicleta;
 import upc.edu.pe.apileadyourway.entities.Chats;
 
 import java.util.List;
 
 public interface IChatsService {
-    void insertarChats(Chats chats);
+    Chats insertarChats(Chats chats);
     public Chats ListaID(int id);
+    public List<Chats>listarTodo();
 }

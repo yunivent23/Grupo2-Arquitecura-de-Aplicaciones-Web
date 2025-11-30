@@ -11,7 +11,8 @@ public class Chats {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idChat;
 
-    @ManyToOne
+
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="idUsuario")
     private Users usuario;
 

@@ -16,6 +16,7 @@ public class NotificacionesServiceImplement implements INotificacionesService {
 
     @Override
     public void insertarNotificaciones(Notificaciones notificaciones) {
+        repository.save(notificaciones);
 
     }
 
@@ -38,5 +39,10 @@ public class NotificacionesServiceImplement implements INotificacionesService {
     public Notificaciones listaID(int id) {
         return repository.findById(id).orElse(null);
     }
+
+    public List<Notificaciones> listarPorUsuario(int idUsuario) {
+        return repository.findByUsuario(idUsuario);
+    }
+
 
 }

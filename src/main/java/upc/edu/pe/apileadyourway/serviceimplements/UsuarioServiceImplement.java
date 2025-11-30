@@ -3,6 +3,7 @@ package upc.edu.pe.apileadyourway.serviceimplements;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import upc.edu.pe.apileadyourway.dtos.UsuarioResultDTO;
 import upc.edu.pe.apileadyourway.entities.Users;
@@ -41,6 +42,10 @@ public class UsuarioServiceImplement implements IUsuarioService {
     @Override
     public void edit(Users u){repository.save(u);};
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 43b0a88b7a1bd37ab0594ecb8f76fb3f14ab762e
     public List<UsuarioResultDTO> buscarPorNombre(String nombre) {
         return repository.buscarPorNombre(nombre);
     }
