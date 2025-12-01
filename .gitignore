@@ -13,6 +13,15 @@ target/
 .springBeans
 .sts4-cache
 
+# Archivo: .gitignore
+# ... otras entradas ...
+
+# Ignorar archivos con secretos locales
+application-dev.properties
+
+# Ignorar binarios de compilación
+target/
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
