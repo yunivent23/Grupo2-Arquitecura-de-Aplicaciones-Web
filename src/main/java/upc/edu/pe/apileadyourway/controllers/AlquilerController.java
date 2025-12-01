@@ -7,13 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import upc.edu.pe.apileadyourway.dtos.AlquilerClienteDTO;
-import upc.edu.pe.apileadyourway.dtos.AlquilerDTO;
-import upc.edu.pe.apileadyourway.dtos.AlquilerSuministradorDTO;
-import upc.edu.pe.apileadyourway.dtos.UsuarioDTO;
+import upc.edu.pe.apileadyourway.dtos.*;
 import upc.edu.pe.apileadyourway.entities.Alquiler;
 import upc.edu.pe.apileadyourway.entities.Users;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IAlquilerService;
+import upc.edu.pe.apileadyourway.serviceinterfaces.IInsightsService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +21,9 @@ import java.util.List;
 public class AlquilerController {
     @Autowired
     private IAlquilerService service;
+
+    @Autowired
+    private IInsightsService Inservice;
 
     @PostMapping("/registrar")
     @PreAuthorize("hasAuthority('CLIENTE')")
@@ -102,6 +103,18 @@ public class AlquilerController {
             listadto.add(dto);
         }
         return  ResponseEntity.ok(listadto);
+    }
+
+    @GetMapping("/menos-alquiladas/{username}")
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')")
+    public List<BicisMenosAlquiladasDTO> menosAlquiladas(@PathVariable String username) {
+        return Inservice.obtenerBicicletasMenosAlquiladas(username);
+    }
+
+    @GetMapping("/conteo-tipo/{username}")
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')")
+    public List<ConteoTipoBicicletaDTO> conteoPorTipo(@PathVariable String username) {
+        return Inservice.contarAlquileresPorTipo(username);
     }
 
 

@@ -24,17 +24,20 @@ public class UsuarioController {
     private IUsuarioService service;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
     public List<UsuarioResultDTO> listar() {
         return service.listarTodo();
     }
 
     @PostMapping
     @PreAuthorize("hasAuthority('SUMINISTRADOR')||hasAuthority('CLIENTE')")
-    public void insert(@RequestBody UsuarioDTO dto) {
-        ModelMapper m = new ModelMapper();
-        Users usuario = m.map(dto, Users.class);
-        usuario.setId(null);
-        service.insert(usuario);
+    public ResponseEntity<Users> insert(@RequestBody Users user) {
+        String rolName = user.getRoles() != null && !user.getRoles().isEmpty()
+                ? user.getRoles().get(0).getRol()
+                : "CLIENTE"; // rol por defecto si no se envía nada
+
+        Users savedUser = service.insert(user);
+        return ResponseEntity.ok(savedUser);
     }
 
     @GetMapping("/buscar/{id}")

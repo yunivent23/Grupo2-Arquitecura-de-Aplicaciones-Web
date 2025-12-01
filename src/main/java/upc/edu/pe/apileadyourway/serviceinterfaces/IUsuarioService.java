@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface IUsuarioService {
     public List<UsuarioResultDTO> listarTodo();
     public Users listId(Long id);
-    public void insert(Users u);
+    public Users insert(Users u);
     public Optional<UsuarioResultDTO> findId(Long id);
     public void delete(Long id);
     public void edit(Users u);

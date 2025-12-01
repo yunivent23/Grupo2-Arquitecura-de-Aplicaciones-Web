@@ -12,4 +12,6 @@ public interface IAlquilerService {
     Alquiler findId(int id);
     List<Alquiler> historialAlquileresCliente(Users cliente);
     List<Alquiler> historialAlquileresSuministrador(Users suministrador);
+
+
 }

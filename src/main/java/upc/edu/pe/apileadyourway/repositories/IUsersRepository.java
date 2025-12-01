@@ -25,7 +25,7 @@ public interface IUsersRepository extends JpaRepository<Users, Long> {
 
     //BUSCAR POR NOMBRE
     @Query("select count(u.username) from Users u where u.username =:username")
-    public int buscarUsername(@Param("username") String nombre);
+    public int buscarUsername(@Param("username") String username);
 
 
     //INSERTAR ROLES

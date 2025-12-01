@@ -20,8 +20,8 @@ public class InsightsController {
 
     @GetMapping("/masBaja/{idSuministrador}")
     @PreAuthorize("hasAuthority('SUMINISTRADOR')")
-    public List<ReseniaBajaDTO> reseniaMasBaja(@PathVariable Long idSuministrador) {
-        return estadisticasService.obtenerReseniaMasBaja(idSuministrador);
+    public List<ReseniaBajaDTO> reseniaMasBaja(@PathVariable String username) {
+        return estadisticasService.obtenerReseniaMasBaja(username);
     }
 
 }

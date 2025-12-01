@@ -7,10 +7,13 @@ import com.stripe.param.PaymentIntentCreateParams;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import upc.edu.pe.apileadyourway.dtos.UsuarioDTO;
 import upc.edu.pe.apileadyourway.dtos.UsuarioResultDTO;
+import upc.edu.pe.apileadyourway.entities.Role;
 import upc.edu.pe.apileadyourway.entities.Users;
+import upc.edu.pe.apileadyourway.repositories.IRoleRepository;
 import upc.edu.pe.apileadyourway.repositories.IUsersRepository;
 import upc.edu.pe.apileadyourway.serviceinterfaces.IUsuarioService;
 
@@ -21,6 +24,12 @@ import java.util.Optional;
 public class UsuarioServiceImplement implements IUsuarioService {
     @Autowired
     private IUsersRepository repository;
+
+    @Autowired
+    private IRoleRepository roleRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<UsuarioResultDTO> listarTodo() {
@@ -33,11 +42,21 @@ public class UsuarioServiceImplement implements IUsuarioService {
     }
 
     @Override
-    public void insert(Users u) {
-        repository.save(u);
-    }
+    public Users insert(Users u) {
+        // encriptar la contraseña
+        u.setPassword(passwordEncoder.encode(u.getPassword()));
 
-    ;
+        // crear rol
+        Role role = new Role();
+        role.setRol("USER");
+        role.setUser(u);
+
+        // agregar el rol a la lista del usuario
+        u.getRoles().add(role);
+
+        // guardar usuario y rol juntos
+        return repository.save(u);
+    }
 
     @Override
     public Optional<UsuarioResultDTO> findId(Long id) {

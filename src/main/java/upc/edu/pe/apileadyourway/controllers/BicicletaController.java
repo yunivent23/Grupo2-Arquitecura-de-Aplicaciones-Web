@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class BicicletaController {
     @Autowired
     private IBicicletaService service;
-    @Autowired
+
     private IUsuarioService uservice;
 
     @GetMapping
